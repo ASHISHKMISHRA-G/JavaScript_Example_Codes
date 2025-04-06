@@ -1,0 +1,303 @@
+Data Types
+- Data Type refers to Data Structure.
+- Data Structure is about the type of data and its behavior.
+- JavaScript is not strongly typed.
+        var age = 10;
+        age = "John";        // valid
+- JavaScript is implicitly typed or dynamically typed.
+- The data type of variable is determined according to the value assigned or initialized.
+
+        var x = 10;        // x is number type
+        x = "A";            // x is string type
+        x = true;            // x is Boolean type
+
+- JavaScript data types are categorized into 2 types
+
+        a) Primitive Types
+        b) Non Primitive Types
+
+Primitive Types:
+- They are immutable types.
+- Their structure can't change.
+- They have a fixed range for values.
+- They are stored in a memory stack.
+- Stack uses the mechanism Last-in-First-Out [LIFO].
+- JavaScript primitive types are:
+
+        1. number
+        2. string
+        3. boolean
+        4. null
+        5. undefined
+        6. symbol
+
+                            Number
+- Number refers to a numeric type.
+- JavaScript numeric type can be any one of the following
+       
+        Signed Integer        - 34
+        Unsigned Integer          34
+        Floating Point              34.00
+        Double                  34.000, 345.00
+        Decimal                  34.00000  [29]
+        Big INT                  900238482n
+        Binary                  0b1010
+        Hexadecimal              11x082
+        Octa                       0o745
+        Exponent                   2e3  [ 2 x 10^3 ] => 2000
+
+- JavaScript provides parsing methods to convert a string to number
+
+        a) parseInt()
+        b) parseFloat()
+
+Syntax:    
+         parseInt("32");        // 32
+         parseInt("34.53");        // 34
+         parseFloat("34.53");    // 34.53
+
+Ex:
+<script>
+       "use strict";
+        var age = parseInt(prompt("Enter Age"));
+        document.write("Your age is " + age + "<br>");
+        document.write("You will be " + (age + 1) + " Next Year");
+</script>
+
+Ex:
+<script>
+       "use strict";
+        var rate = parseFloat(prompt("Interest Rate"));
+        document.write("Your interest rate is " + rate + "<br>");
+        document.write("It will be increase by 1 ," + (rate + 1) + " Next Year");
+</script>
+
+- JavaScript provides various methods to convert a number into string or to display in desired format.
+
+            a) toFixed()
+            b) toString()
+            c) toLocaleString()
+
+Syntax:
+        var x = 45.00;
+        document.write("x=" + x.toFixed(2));      // 45.00
+        document.write("x=" + x);              // 45
+
+Syntax:
+        var price = 45000.44;
+        price.toLocaleString()
+        price.toLocaleString('en-in')
+        price.toLocaleString('en-in', { style: "currency", currency: "INR" })
+
+Ex:
+<script>
+       "use strict";
+        var price = 540000.45;
+        document.write("Price=" + price.toLocaleString('en-in',{style:"currency", currency:"INR"}));
+</script>
+
+- JavaScript can verify number by using "isNaN()" method. It returns true if the given value is not a valid number.
+
+Ex:
+<script>
+       "use strict";
+        var price = parseFloat(prompt("Enter Price"));
+        if(isNaN(price)){
+              document.write("Price must be a number");
+        } else {
+              document.write("Price=" + price.toLocaleString('en-in',{style:"currency", currency:"INR"}));
+        }
+       
+</script>
+
+Note: You can convert a numeric string only when it is starting with a number.
+     
+        parseInt("45AB");        // valid  = 45
+        parseInt("AB45");        // invalid = NaN
+        parseInt("45AB56");    // valid = 45
+
+- JavaScript provides a "Math" library to handle complex operations on numbers
+
+        Math.PI
+        Math.sqrt()
+        Math.round()
+        Math.random()
+        Math.floor()
+        Math.pow()
+        Math.sin()
+        etc..
+
+Arithematic Operators:
+
+    +        Addition
+    -        Subtraction
+    *        Multiplication
+    /        Division
+    %        Modulus Division
+    **        Power  [ 2 ** 3 = 8 ] Math.pow(2,3)
+    ++        Increment
+    --        Decrement
+
+Increment Operator
+    a) Pre Increment     : It increments and later assigns to the reference.
+    b) Post Increment    : It assigns and later increments the value.
+
+Syntax:
+        var x  = 10;
+        var y  = x++; [x = x + 1]            // post increment
+
+         x = 11,
+         y = 10
+
+         var y = ++x;                    // pre increment
+         
+         x = 11;
+         y = 11;
+
+Decrement Operator
+    a) Pre Decrement
+   
+            var x = 10;
+            var y = --x;        x=9,  y=9
+
+    b) Post Decrement
+
+            var y = x--;        x=9, y=10
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        var likes = 0;
+        function LikesClick(){
+            likes++;
+            document.getElementById("lblLikes").innerHTML = likes;
+        }
+    </script>
+</head>
+<body class="container-fluid">
+    <figure class="mt-4">
+        <img src="../public/images/women-shop.jpg" width="200" height="300" class="mb-4">
+        <div>
+            <button onclick="LikesClick()" class="btn btn-primary bi bi-hand-thumbs-up"> (<span id="lblLikes">0</span>) Likes </button>
+        </div>
+    </figure>
+</body>
+</html>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function GenerateCode(){
+            var a = Math.round(Math.random()*10);
+            var b = Math.round(Math.random()*10);
+            var c = Math.round(Math.random()*10);
+            var d = Math.round(Math.random()*10);
+            var e = Math.round(Math.random()*10);
+            var f = Math.round(Math.random()*10);
+
+            document.getElementById("lblCode").innerHTML = a + "&nbsp;" + b + "&nbsp;" + c + "&nbsp;" + d + "&nbsp;" + e + "&nbsp;" + f;
+        }
+    </script>
+</head>
+<body onload="GenerateCode()" class="container-fluid">
+    <dl>
+        <h3>User Login</h3>
+        <dt>User Id</dt>
+        <dd><input type="text"></dd>
+        <dt>Password</dt>
+        <dd><input type="password"></dd>
+        <dt>Verify Code <button onclick="GenerateCode()" class="btn bi bi-arrow-clockwise"></button> </dt>
+        <dd id="lblCode"></dd>
+    </dl>
+    <button class="btn btn-primary">Login</button>
+</body>
+</html>
+
+
+Ex: EMI Calculator
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI - Calculator</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function AmountChange(){
+            document.getElementById("txtAmount").value = document.getElementById("amountRange").value;
+        }
+        function YearChange(){
+            document.getElementById("txtYears").value = document.getElementById("yearRange").value;
+        }
+        function RateChange(){
+            document.getElementById("txtRate").value = document.getElementById("rateRange").value;
+        }
+        function CalculateClick(){
+            var P = parseInt(document.getElementById("txtAmount").value);
+            var r = parseFloat(document.getElementById("txtRate").value)/12/100;
+            var n = parseInt(document.getElementById("txtYears").value) * 12;
+            var EMI = P * r * (Math.pow(1+r,n)) / Math.pow(1+r,n) - 1;
+            document.getElementById("lblResult").innerHTML = "Your monthly installment amount is <span class='fs-3 text-primary fw-bold'>" + Math.round(EMI).toLocaleString('en-in',{style:'currency', currency:'INR'}) + "</span> for next " + n + " months."
+        }
+    </script>
+</head>
+<body class="container-fluid bg-secondary">
+    <div class="p-4 m-4 bg-light">
+       <h5 class="text-center my-4">Personal Loan EMI Calculator</h5>
+       <div class="row">
+           <div class="col">
+                Amount you need &#8377; <input type="text" id="txtAmount" size="16">
+           </div>
+           <div class="col">
+                for <input type="text" id="txtYears" size="2"> years
+           </div>
+           <div class="col">
+                interest rate <input type="text" id="txtRate" size="2"> %
+           </div>
+       </div>
+       <div class="row my-4">
+          <div class="col">
+              <input onchange="AmountChange()" type="range" min="100000" max="1000000" value="100000" class="form-range" id="amountRange">
+              <span>&#8377; 1,00,000</span>
+              <span class="float-end">&#8377; 10,00,000</span>
+          </div>
+          <div class="col">
+              <input onchange="YearChange()" type="range" min="1" max="5" value="1" class="form-range" id="yearRange">
+              <span>1</span>
+              <span class="float-end">5</span>
+          </div>
+          <div class="col">
+              <input onchange="RateChange()" type="range" min="10.45" value="10.45" max="18.45" step="0.01" class="form-range" id="rateRange">
+              <span>10.45%</span>
+              <span class="float-end">18.45%</span>
+          </div>
+       </div>
+       <div class="row my-4">
+            <div class="col text-end">
+                <button onclick="CalculateClick()" class="btn btn-primary">Calculate</button>
+            </div>
+       </div>
+       <div class="row">
+            <div class="col text-center">
+                 <p id="lblResult"></p>
+            </div>
+       </div>
+    </div>
+</body>
+</html>
