@@ -1,0 +1,196 @@
+Boolean Type
+- Boolean is used in decision making.
+- JavaScript Boolean type uses "true" & "false" keywords.
+- However the Boolean conditions can use numeric 0 for false and 1 for true.
+
+Syntax:
+        var stock = true;
+       
+         if(stock == 1)        //bad code
+         {
+         }
+
+         if(stock == true)         // good code
+         {
+         }
+
+- HTML Boolean attributes are
+
+        - open
+        - readonly
+        - disabled
+        - checked
+        - required
+        - selected
+        etc..
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyName(){
+            var txtName = document.getElementById("txtName").value;
+            var button = document.querySelector("button");
+            if(txtName.length==0) {
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
+        }
+        function CheckboxChange(){
+            var chkPreview = document.getElementById("chkPreview");
+            var imgPreview = document.getElementById("imgPreview");
+
+            if(chkPreview.checked==true){
+                imgPreview.style.display = "block";
+            } else {
+                imgPreview.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" onblur="VerifyName()" id="txtName"></dd>
+        <dt> <input type="checkbox" onchange="CheckboxChange()" id="chkPreview"> Show Preview </dt>
+        <dd id="imgPreview" style="display: none;">
+            <img width="200" height="200" src="../public/images/women-fashion.jpg">
+        </dd>
+    </dl>
+    <button disabled>Submit</button>
+</body>
+</html>
+
+                         Toggle with Boolean
+
+- JavaScript uses "ternary operator" to configure simple toggle.
+- Ternary operator depends on a Boolean condition.
+- Ternary operator uses 3 operands with "?:"
+
+    (condition)?true:false
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function StockChange(){
+            var optStock = document.getElementById("optStock");
+            var lblStock = document.getElementById("lblStock");
+
+            lblStock.innerHTML = (optStock.checked)? "Available" : "Out of Stock";
+        }
+        function SortClick(){
+            var btnSort = document.getElementById("btnSort");
+            btnSort.className = (btnSort.className=="bi bi-sort-alpha-down")? "bi bi-sort-alpha-up": "bi bi-sort-alpha-down";
+        }
+        function ViewClick(){
+            var txtInput = document.getElementById("txtInput");
+            var btnView = document.getElementById("btnView");
+           
+            txtInput.type = (txtInput.type=="password")?"text":"password";
+
+            btnView.className = (btnView.className=="bi bi-eye")? "bi bi-eye-slash": "bi bi-eye";
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>Stock</dt>
+        <dd><input id="optStock" onchange="StockChange()" type="checkbox"> <label id="lblStock"> Out of Stock </label> </dd>
+        <dt>Sort</dt>
+        <dd><button id="btnSort" onclick="SortClick()" class="bi bi-sort-alpha-down"></button></dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" id="txtInput"> <button onclick="ViewClick()" id="btnView" class="bi bi-eye-slash"></button>
+        </dd>
+    </dl>
+</body>
+</html>
+
+Primitive Data Types
+- Number
+- String
+- Boolean
+- Undefined
+- Null
+- Symbol
+- Bigint
+
+                               Undefined
+- It specifies that value is not defined into reference.
+- If value is not assigned or initialized into a variable at compile time then it is set to "undefined".
+            var price;
+            console.log(`Price=${price}`);        // Price = undefined
+
+- You can check the undefined type by using "undefined" keyword.
+
+            if(price==undefined)        // not good
+            {
+            }
+
+            if(price)                // returns true if price is defined with value
+            {
+            }
+               
+Ex:
+<script>
+     var price;
+
+     if(price){
+        document.write(`Price=${price}`);
+     }
+     else {
+        document.write(`Price Not Defined with Value`);
+     }
+</script>
+
+                                Null
+- It is a data type returned for reference when value is not provided at runtime of application.
+- Runtime value is expected using prompt, form input elements etc.
+- You can use "null" as keyword to verify the value.
+
+Syntax:
+        var price = prompt("Enter Price");
+        if(price==null)        // not good
+        {
+        }
+
+              (or)    
+        if(price!==null)        // good
+        {
+        }
+
+Ex:
+<script>
+     var price = prompt("Enter Price");
+
+     if(price!==null){
+        document.write(`Price=${price}`);
+     }
+     else {
+        document.write(`Price Not Defined with Value`);
+     }
+</script>
+
+
+                            Symbol
+- It is a primitive data type to configure unique hidden fields.
+- It is accessible individually and hidden over iterations.
+
+Syntax:
+        var   id  = Symbol();
+
+        var obj = {
+            [id] : 1,
+            Name: "TV"
+        }
