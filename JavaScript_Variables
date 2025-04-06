@@ -1,0 +1,121 @@
+Variables
+- Declaration
+- Assignment
+- Initialization
+- var
+- let
+- const
+- Shadowing
+- Hoisting
+- Closure  
+- Block Scope
+- Function Scope
+
+Global Scope for Variable:
+
+- In JavaScript global refers to module.
+- A module comprises of functions, classes and values.
+- If you declare or initialize any variable at module level then it is considered as Global.
+- You can use any keyword like var, let, or const for configuring global variable.
+
+Ex:
+<script>
+     "use strict";
+     var x = 10;
+     let y = 20;
+     const z = 30;
+     function f1(){
+        document.write("f1 x=" + x + " y=" + y + " z=" + z + "<br>");
+     }
+     function f2(){
+        document.write("f2 x=" + x + " y=" + y + " z=" + z + "<br>");
+     }
+     f1();
+     f2();
+</script>
+
+FAQ: Can we configure a variable with global scope inside function?
+Ans:  Yes. By using JavaScript browser "window" object.
+      It is possible only when JavaScript is running in browser.
+
+Syntax:
+        window.anyName  = value;
+        document.write(anyName);
+
+Ex:
+<script>
+     "use strict";
+     var x = 10;
+     let y = 20;
+     const z = 30;
+     function f1(){
+        window.a = 50;
+        document.write("f1 x=" + x + " y=" + y + " z=" + z + " a=" + a + "<br>");
+     }
+     function f2(){
+        document.write("f2 x=" + x + " y=" + y + " z=" + z + " a=" + a + "<br>");
+     }
+     f1();
+     f2();
+</script>
+
+- JavaScript E6+ version support variable "De-structuring"
+
+Syntax:
+       const [x, y, z] = [10, 20, 30];
+       const [x, y, z] = 10;            // invalid - not iterable
+       const [x, y, z] = [10];            // valid   x=10, y=undefined, z=undefined
+
+- JavaScript allows to configure multiple variables using one keyword. It uses "," delimiter.
+
+Syntax:
+    var x, y, z = 30;        x=undefined, y=undefined, z=30
+    x = 10;
+    y = 20;
+
+- You can access variables individually that are configured using de-structure technique or in sequential order.
+
+Syntax:    
+      var [x, y] = [10];
+      y = 20;
+      x = 30;
+
+Syntax:
+     var x; y=10, z=20;         ";" is a terminator
+                          Invalid syntax
+                          x = undefined
+                          y,z not defined
+
+     var x; let y=10, z=20;      x = undefined, y=10, z=20
+
+   
+Syntax:
+     var x =  y = z = 10;        // invalid z is not defined
+
+     var y,z;
+     var x = y = z = 10;        // x=10, y=10, z=10
+
+Variable Naming Rules:
+
+- It must start with alphabet or "_" underscore.
+- It can't start with number or other special chars.
+- Special chars are not recommended in variable names.
+
+        var _product;            // valid  - template type
+
+- It can't be a keyword of JavaScript.
+
+        var while;            // invalid
+       
+- Name can be max 255 chars long. [ECMA Standards]
+- It must speak what it is.
+
+        var product;
+        var products;
+        var studentName;
+
+- It is recommended to use "camelCase"
+
+        var txtName;
+        var btnSubmit;
+        var employeeName;
