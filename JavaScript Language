@@ -1,0 +1,101 @@
+JavaScript Language
+1. Variables
+2. Data Types
+3. Operators
+4. Statements
+5. Functions
+6. OOP
+
+                                 Variables
+- Variables are storage locations in memory where you can store a value and use it as
+   a part of any expression.
+
+- Variable configuration comprises of various phases.
+
+        a) Declaration
+        b) Initialization
+        c) Assignment
+
+- Declaration comprises of a keyword and variable name
+
+        keyword  variableName;
+
+        keyword    : It defines the behavior and rules.
+        Name    : It is a memory reference name.
+
+- JavaScript variables are declared by using following keywords
+   
+        a) var
+        b) let
+        c) const
+
+- Variable assignment is the process of configuring a value into memory after declaration.
+
+        var  age;            // declaring
+        age = 30;            // assigning
+
+- Initialization is the process of configuring a value into memory while declaring a variable.
+
+        var age = 30;        // initialization
+
+Note: Declaring variable is optional when JavaScript is not in strict mode. But it is not
+      recommended to use JavaScript without strict mode.
+
+var:
+- It configures a function scope for variable.
+- You can declare in any block of a function and access from any another block.
+- It allows declaration, initialization and assignment.
+   
+Ex:
+<script>
+    "use strict";
+     function f1()
+     {
+        var x;                  // declaration
+        x = 10;                 // assignment
+        if(x==10)
+        {
+            var y = 20;         // initializaiton
+        }
+        document.write("x=" + x + "<br>y=" + y);
+     }
+     f1();
+</script>
+
+ - It allows shadowing.
+ - Shadowing is the process of re-declaring or re-initializing same name identifier with in the scope.
+ - Shadowing allows to reset the allocated memory.
+
+Syntax:
+        var x = 10;        // initialization
+        x=20;            // assignment
+        x=30;            // assignment
+        var x = 40;        // shadowing
+
+ - Var allows hoisting.
+ - Hoisting is the process of configuring the declaration and assignment with out any order dependency.
+ - It allows to use and declare later.
+
+Syntax:
+        x = 10;
+        document.write("x=" + x);
+        var x ;                    // hoisting
+
+let :
+- It configures a block scope for variable.
+- A block scope variable is accessible in the same block and its inner blocks.
+- It allows declaring, assignment and initialization.
+- It will not allow shadowing and hoisting.
+
+
+const:
+- It configures a block scope for variable.
+- It allow only initialization.
+- It will not allow declaration and assignment.
+- It will not allow shadowing and hoisting.
+
+Syntax:
+        const x ;         // invalid
+       
+        const x = 10;
+        x = 20;        // invalid
