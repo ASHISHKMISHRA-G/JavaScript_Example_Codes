@@ -1,0 +1,228 @@
+Issues with JavaScript:
+- It is not strongly typed language.
+         age = 22;
+         age = "A";
+- Explicit verification of type is required to restrict data type.
+- It is not implicitly strictly typed.
+- Explicit strict mode is required to enable.
+- It is not an OOP language.
+- Code level security issues.
+- Extensibility issues.
+
+Alternative : TypeScript
+
+Developer writes in TypeScript => Trans compiled into JavaScript
+
+Integrate JavaScript functions into Page:
+1. Inline JavaScript
+2. Embedded
+3. External File
+
+
+Inline:
+- The functions are written for element directly within the token.
+- They are fast in interactions.
+- You can't reuse the functions.
+
+Syntax:
+        <button  onclick="function(){}">  Click </button>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Your Ticket</h2>
+    <button onclick="window.print()">Print</button>
+</body>
+</html>
+
+Note: JavaScript must be enabled in browser in order use functions in browser.
+          HTML provides <noscript> element to verify JavaScript in browser.
+
+Syntax:
+        <noscript>
+               please enable JavaScript on your browser
+        </noscript>
+
+2. Embedded
+- JavaScript functions are written in a <script> container.
+- You can embed in head or body sections.
+- The MIME type is "text/javascript".
+- To turn on strict mode, you have to start with "use strict" inside script container.
+
+Syntax:
+        <head>
+             <script type="text/javascript">
+           
+            "use strict";
+
+             function Name()
+             {
+             }
+
+             </script>
+        </head>
+
+- It allows to reuse the functions.
+- It is easy to extend the functionality.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        "use strict";
+         function PrintPage()
+         {
+            window.print();
+         }
+    </script>
+</head>
+<body>
+    <noscript> Please enable JavaScript on your browser. </noscript>
+    <h2>Your Ticket</h2>
+    <button onclick="PrintPage()">Print</button>
+</body>
+</html>
+
+3. External File
+- You can configure JavaScript functions in a separate script file with extension ".js"
+- You can link to any page and access functions from various elements.
+- You can reuse across pages.
+- Using external file will increase the number of requests and also page load time.
+
+Ex:
+1. Go to "src/scripts" folder
+2. Add new file  "print.js"
+
+         "use strict";
+         function PrintPage()
+         {
+            window.print();
+         }
+
+3. Add HTML page  home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../src/scripts/print.js"> </script>
+</head>
+<body>
+    <noscript> Please enable JavaScript on your browser. </noscript>
+    <h2>Your Ticket</h2>
+    <button onclick="PrintPage()">Print</button>
+</body>
+</html>
+
+Note : You can minify the JavaScript code and use for production.
+
+         https://www.toptal.com/developers/javascript-minifier
+
+           You can target the code for legacy browsers by enclosing JavaScript functions
+       in HTML comments.
+
+Syntax:
+        <!--
+                "use strict";
+             function  Name()
+             {
+             }
+        -->
+
+
+       You can add JavaScript comments using 2 techniques
+
+        a) Single Line Comments    //
+        b) Multiline Comments        /*    */
+
+      Comments are not compiled or interpreted.
+
+Syntax:
+        <script type="text/javascript">
+            /*
+                        A program
+            to print hello.
+           */
+
+            var msg = "Hello";        // storing hello
+
+        </script>
+
+JavaScript Reference Techniques:
+- JavaScript can convert a static DOM element into dynamic DOM element.
+- It can refer HTML elements in page by using following techniques
+
+    1. DOM Hierarchy
+    2. Refer by Name
+    3. Refer by Id
+    4. Refer by CSS Selectors
+
+DOM Hierarchy:
+- Elements are arranged in a hierarchical order called DOM.
+- JavaScript can access elements using DOM hierarchy.
+- It uses index references for elements in a collection.
+- It is native and fastest way to access elements.
+- However it is not good for page that changes its design regularly.
+- Change in position of any element in page  requires change of index number in code every time.
+
+Syntax:
+        window.document.images[]
+        window.document.forms[].elements[]
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function bodyload()
+        {
+            window.document.images[0].src = "../public/images/women-fashion.jpg";
+            window.document.forms[0].elements[1].value = "Login";
+            window.document.forms[1].elements[3].value = "Register";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <div>
+        <img width="100" height="100">
+    </div>
+    <div>
+        <form>
+            <h3>Login</h3>
+            <label>User Name</label>
+            <input type="text">
+            <input type="button">
+        </form>
+    </div>
+    <div>
+        <form>
+            <h3>Register</h3>
+            <label>Your Email</label>
+            <input type="email">
+            <br><br>
+            <label>Password</label>
+            <input type="password">
+            <br><br>
+            <label>UserName</label>
+            <input type="text">
+            <br><br>
+            <input type="button">
+        </form>
+    </div>
+</body>
+</html>
