@@ -1,0 +1,171 @@
+Output Techniques
+- alert()
+- confirm()
+- document.write()
+
+textContent  & innerText
+- These are the properties used to display output in any container element that can handle text.
+    <div> <span> <header> <footer> <p> <h2> etc..
+
+- They will not allow any complex formats. [RC Type]
+
+Syntax:
+    document.querySelector("p").innerText = "message";
+    document.querySelector("p").textContent = "message";
+
+innerHTML :
+- It is similar to innerText but allows formats and markup.
+- It adds new element into the context of existing element.
+
+outerHTML:
+- It is similar to innerHTML but replaces the existing element with new element.
+
+Syntax:
+      document.querySelector("p").innerHTML = "<h2> Hello </h2>";
+   
+        <p>        
+           <h2> Hello </h2>
+        </p>
+
+      document.querySelector("p").outerHTML = "<h2> Hello </h2>";
+
+        <h2> Hello </h2>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function DeleteClick(){
+           result = confirm("Delete Record\nAre you sure?");
+           if(result==true)
+           {
+              document.querySelector("p").innerHTML = "<h2>Deleted Successfully..</h2>";
+           }
+           else
+           {
+              document.querySelector("p").outerHTML = "<h2>Canceled..</h2>";
+           }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="DeleteClick()">Delete</button>
+    <p></p>
+</body>
+</html>
+
+Console Methods:
+- Console is a command line tool of browser.
+- Developers use console for testing commands client side.
+- JavaScript provides various contextual console methods
+
+        log()
+        warn()
+        error()
+        info()
+        debug()
+        etc.
+
+Syntax:
+        console.warn("Warning Message");
+        console.error("Invalid Operations");
+
+Summary:
+1. alert()
+2. confirm()
+3. document.write()
+4. innerText
+5. textContent
+6. innerHTML
+7. outerHTML
+8. console methods
+
+
+                     JavaScript Input Techniques
+- Input is the process of scanning a value from user and storing in a reference or using in the page.
+- JavaScript can handle input using following techniques
+
+    a) Query String
+    b) prompt()
+    c) Form Input Elements
+
+Query String:
+1. Query String is a key and value collection.
+2. It is appended into URL using "?" character.
+3. It is configured in browser search / address bar.
+
+      http://127.0.0.1:5500/input.html?key=value
+
+4. You have to access query string on  page load by using
+       
+       "location.search"
+
+Note: Query String returns complete query with  "?key=value".
+      You have to use various string methods to slice only value from string.
+
+            slice()        It can read and returns chars between specified index.
+            indexOf()        It returns index number of a char in given string.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            str = location.search;
+            result = str.slice(str.indexOf("=")+1);
+            document.getElementById("msg").innerHTML = result;
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2> Searching For : <span id="msg"></span> </h2>
+</body>
+</html>
+
+prompt():
+- It is an input box that pops up in browser window.
+- User can input value and submit to page.
+
+Syntax:
+        prompt("message", "default_value");
+        prompt("message");
+
+- prompt() method returns the following
+
+        null        : on cancel click
+        ' '        : empty string, on OK click without value.
+        'value'    : returns value on OK with value
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            result = prompt("Enter Search String");
+            if(result==null) {
+                alert("You canceled..");
+            }
+            else if(result=='') {
+                alert("Please enter search string\nIt can't be empty");
+            } else {
+                document.getElementById("msg").innerHTML = result;
+            }
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2> Searching For : <span id="msg"></span> </h2>
+</body>
+</html>
