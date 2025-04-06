@@ -1,0 +1,73 @@
+                          JavaScript
+- JavaScript is light weight interpreted and JIT compiled programming language.
+
+- It is light weight as it occupies less memory.
+- It is interpreted as it translates line-by-line of program.
+- It is compiled as it can translate all lines simultaneously at the same time.
+- It can use 2 types of compiling techniques
+        a) JIT
+        b) AOT
+- JIT is Just-in-Time, which compiles in browser when it is requested in browser.
+- AOT is Ahead-of-Time, which compiles at application and renders output in browser.
+
+- JavaScript is a language that supports various programming approaches like
+    a) Structural
+    b) Functional
+    c) Imperative
+    d) Object Oriented  etc..
+
+Note: JavaScript is not an OOP language. It supports only few features of OOP.
+
+- JavaScript is used
+    a) Client Side
+    b) Server Side
+    c) Database
+    d) Animations etc..
+
+                           JavaScript Client Side
+- JavaScript is used client side to reduce burden on server.
+- It handles
+
+    a) DOM Interactions
+    b) BOM Actions
+    c) Validations
+    d) State   etc..
+
+- DOM Interactions [Document Object Model]
+    * Adding elements into page
+    * Removing elements from page
+    * Updating data into elements
+    * Styling elements dynamically
+    * Adding functionality to elements in page etc.
+
+- BOM Actions [Browser Object Model]
+    * Location
+    * History
+    * Navigator
+    * Window
+
+- Validation
+    * Checking for contradictory values
+    * Preventing unauthorized values
+
+- State
+    * Storing data locally
+    * Session, Local, Cookies etc.
+
+Evolution of JavaScript:
+
+- CERN [Council for European Research & Nuclear] labs developed a script called "ECMA Script" for "Mosaic Browser" in early days of internet.
+
+- Netscape Communications developed a browser called "Netscape Navigator" for internet.
+
+- Netscape appointed "Brendan Eich" to design a client side script for their browser Netscape Navigator.
+
+- Brendan Eich design a script by name "Mocha", later renamed as "Live Script".
+
+- Netscape given the responsibility of Live Script to "Sun Microsystems".
+
+- Sun Microsystems renamed Live Script to "JavaScript".
+
+- In 2000 Netscape stopped its services, and given responsibility of JavaScript to ECMA.
+
+- The latest version of JavaScript is  ECMA2024  [ES15]   June-2024
