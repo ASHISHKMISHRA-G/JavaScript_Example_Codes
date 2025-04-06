@@ -1,0 +1,310 @@
+How to use JavaScript in page?
+How JavaScript Refers HTML elements?
+
+1. By using DOM hierarchy
+
+2. Refer by Name
+- Every element can have a reference name.
+- You can access directly using reference name.
+   
+        <img name="pic">
+        <form name="login">
+
+         pic.src="";
+         login
+
+- You can't access a generic child element without referring to its parent.
+- "Name" can be common for multiple elements in a page.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function bodyload()
+        {
+            poster.src = "../public/images/men-fashion.jpg";
+            frmLogin.btnLogin.value = "Login";
+            frmRegister.btnRegister.value = "Register";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <div>
+        <img width="100" height="100" name="poster">
+    </div>
+    <div>
+        <form name="frmLogin">
+            <h3>Login</h3>
+            <label>User Name</label>
+            <input type="text">
+            <input type="button" name="btnLogin">
+        </form>
+    </div>
+    <div>
+        <form name="frmRegister">
+            <h3>Register</h3>
+            <label>Your Email</label>
+            <input type="email">
+            <br><br>
+            <label>Password</label>
+            <input type="password">
+            <br><br>
+            <input type="button" name="btnRegister">
+        </form>
+    </div>
+</body>
+</html>
+
+3. Refer By using ID
+- Every element in page can have a unique ID reference.
+- JavaScript can access elements using DOM method for ID
+     "document.getElementById()"
+- You can refer any element directly without following the hierarchical order.
+
+        <img id="pic">
+        <input type="button" id="btnLogin">
+
+        document.getElementById("pic").src
+        document.getElementById("btnLogin").value
+
+- "ID" is used as selector in CSS, where it can be common for multiple elements. This leads to issues in JavaScript.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function bodyload()
+        {
+            document.getElementById("poster").src = "../public/images/kids-fashion.jpg";
+            document.getElementById("btnLogin").value = "Login";
+            document.getElementById("btnRegister").value = "Register";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <div>
+        <img width="100" height="100" id="poster">
+    </div>
+    <div>
+        <form name="frmLogin">
+            <h3>Login</h3>
+            <label>User Name</label>
+            <input type="text">
+            <input type="button" id="btnLogin">
+        </form>
+    </div>
+    <div>
+        <form name="frmRegister">
+            <h3>Register</h3>
+            <label>Your Email</label>
+            <input type="email">
+            <br><br>
+            <label>Password</label>
+            <input type="password">
+            <br><br>
+            <input type="button" id="btnRegister">
+        </form>
+    </div>
+</body>
+</html>
+
+4. Refer using CSS selectors
+- JavaScript uses a DOM method  "document.querySelector()" to refer elements with CSS selector syntax.
+- It can use various CSS selectors like primary, rational, attribute, etc.
+
+        <img>
+        <input type="button" class="btn">
+
+        document.querySelector("img").src="";
+        document.querySelector(".btn").value
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function bodyload()
+        {
+           document.querySelector("img").src = "../public/images/women-fashion.jpg";
+           document.querySelector("#btnLogin").value = "Login";
+           document.querySelector(".btn-register").value = "Register";
+        }
+    </script>
+    <style>
+        .btn-register {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body onload="bodyload()">
+    <div>
+        <img width="100" height="100">
+    </div>
+    <div>
+        <form name="frmLogin">
+            <h3>Login</h3>
+            <label>User Name</label>
+            <input type="text">
+            <input type="button" id="btnLogin">
+        </form>
+    </div>
+    <div>
+        <form name="frmRegister">
+            <h3>Register</h3>
+            <label>Your Email</label>
+            <input type="email">
+            <br><br>
+            <label>Password</label>
+            <input type="password">
+            <br><br>
+            <input type="button" class="btn-register">
+        </form>
+    </div>
+</body>
+</html>
+
+5. Referring multiple Elements
+
+     document.getElementsByTagName()
+     document.getElementsByClassName()
+     document.getElementsByName()
+
+
+                       JavaScript Output Techniques
+- Output is the process of rendering response for client request.
+- JavaScript provides various properties and methods for handling output.
+
+    1. alert()
+    2. confirm()
+    3. document.write()    
+    4. console methods [log(), error(), warn(), info(), debug()]
+    5. textContent
+    6. innerText
+    7. innerHTML
+    8. outerHTML
+
+
+alert()
+- It pops up a message box in window.
+- You can display any plain content in message box.
+- It is RC data type.
+- You can use "\n" for line breaks.
+
+Syntax:
+        alert("line-1 \n line-2");
+
+- It will not allow to cancel the message.
+- It is used for mandatory confirmation in page.
+- It will not allow to perform any another task in page if not confirmed.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function DeleteClick(){
+            alert("Delete Record\nRecord Deleted Successfully..");
+        }
+    </script>
+</head>
+<body>
+    <button onclick="DeleteClick()">Delete</button>
+</body>
+</html>
+
+
+confirm()
+- It is similar to alert but allows to cancel.
+- It is a Boolean method that returns
+     true        on OK
+     false    on Cancel
+- You have to use a condition to report various actions on OK & Cancel.
+
+Syntax:
+        result = confirm("your message");
+        if(result==true)
+        {
+           actions on OK;
+        }
+        else
+        {
+           actions on Cancel;
+        }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function DeleteClick(){
+           result = confirm("Delete Record\nAre you sure?");
+           if(result==true)
+           {
+              alert("Deleted..");
+           }
+           else
+           {
+              alert("Canceled..");
+           }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="DeleteClick()">Delete</button>
+</body>
+</html>
+
+document.write()
+- It a JavaScript method that renders markup or complex formats on new screen of same page.
+- Line Breaks <br> and blank space "&nsbsp" and complex elements are allowed.
+
+Syntax:
+    document.write("Message | markup");
+
+Note: All output methods can render result of any expression.
+
+            alert(10 + 20);                    // 30
+            alert("Addition=" + (10+20));        // Addition=30
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function DeleteClick(){
+           result = confirm("Delete Record\nAre you sure?");
+           if(result==true)
+           {
+              document.write("<font color='red' size='6'><b>Deleted..</b></font><br> <a href='output.html'>Back</a>");
+           }
+           else
+           {
+              document.write("Canceled..<br> <a href='output.html'> back </a>");
+           }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="DeleteClick()">Delete</button>
+</body>
+</html>
