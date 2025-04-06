@@ -1,0 +1,128 @@
+Data Types
+- Data Type refers to Data Structure.
+- Data Structure is about the type of data and its behavior.
+- JavaScript is not strongly typed.
+        var age = 10;
+        age = "John";        // valid
+- JavaScript is implicitly typed or dynamically typed.
+- The data type of variable is determined according to the value assigned or initialized.
+
+        var x = 10;        // x is number type
+        x = "A";            // x is string type
+        x = true;            // x is Boolean type
+
+- JavaScript data types are categorized into 2 types
+
+        a) Primitive Types
+        b) Non Primitive Types
+
+Primitive Types:
+- They are immutable types.
+- Their structure can't change.
+- They have a fixed range for values.
+- They are stored in a memory stack.
+- Stack uses the mechanism Last-in-First-Out [LIFO].
+- JavaScript primitive types are:
+
+        1. number
+        2. string
+        3. boolean
+        4. null
+        5. undefined
+        6. symbol
+
+                            Number
+- Number refers to a numeric type.
+- JavaScript numeric type can be any one of the following
+       
+        Signed Integer        - 34
+        Unsigned Integer          34
+        Floating Point              34.00
+        Double                  34.000, 345.00
+        Decimal                  34.00000  [29]
+        Big INT                  900238482n
+        Binary                  0b1010
+        Hexadecimal              11x082
+        Octa                       0o745
+        Exponent                   2e3  [ 2 x 10^3 ] => 2000
+
+- JavaScript provides parsing methods to convert a string to number
+
+        a) parseInt()
+        b) parseFloat()
+
+Syntax:    
+         parseInt("32");        // 32
+         parseInt("34.53");        // 34
+         parseFloat("34.53");    // 34.53
+
+Ex:
+<script>
+       "use strict";
+        var age = parseInt(prompt("Enter Age"));
+        document.write("Your age is " + age + "<br>");
+        document.write("You will be " + (age + 1) + " Next Year");
+</script>
+
+Ex:
+<script>
+       "use strict";
+        var rate = parseFloat(prompt("Interest Rate"));
+        document.write("Your interest rate is " + rate + "<br>");
+        document.write("It will be increase by 1 ," + (rate + 1) + " Next Year");
+</script>
+
+- JavaScript provides various methods to convert a number into string or to display in desired format.
+
+            a) toFixed()
+            b) toString()
+            c) toLocaleString()
+
+Syntax:
+        var x = 45.00;
+        document.write("x=" + x.toFixed(2));      // 45.00
+        document.write("x=" + x);              // 45
+
+Syntax:
+        var price = 45000.44;
+        price.toLocaleString()
+        price.toLocaleString('en-in')
+        price.toLocaleString('en-in', { style: "currency", currency: "INR" })
+
+Ex:
+<script>
+       "use strict";
+        var price = 540000.45;
+        document.write("Price=" + price.toLocaleString('en-in',{style:"currency", currency:"INR"}));
+</script>
+
+- JavaScript can verify number by using "isNaN()" method. It returns true if the given value is not a valid number.
+
+Ex:
+<script>
+       "use strict";
+        var price = parseFloat(prompt("Enter Price"));
+        if(isNaN(price)){
+              document.write("Price must be a number");
+        } else {
+              document.write("Price=" + price.toLocaleString('en-in',{style:"currency", currency:"INR"}));
+        }
+       
+</script>
+
+Note: You can convert a numeric string only when it is starting with a number.
+     
+        parseInt("45AB");        // valid  = 45
+        parseInt("AB45");        // invalid = NaN
+        parseInt("45AB56");    // valid = 45
+
+- JavaScript provides a "Math" library to handle complex operations on numbers
+
+        Math.PI
+        Math.sqrt()
+        Math.round()
+        Math.random()
+        Math.floor()
+        Math.pow()
+        Math.sin()
+        etc..
