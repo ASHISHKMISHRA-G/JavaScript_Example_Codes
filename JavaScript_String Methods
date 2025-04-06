@@ -1,0 +1,165 @@
+String Formatting Method
+String Manipulation
+- length
+- charAt()
+- charCodeAt()
+- indexOf()
+- lastIndexOf()
+- startsWith()
+- endsWith()
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyName(){
+            var username = document.getElementById("txtName").value;
+            var lblName = document.getElementById("lblName");
+
+            if(username.charCodeAt(0)>=65 && username.charCodeAt(0)<=90){
+                lblName.innerHTML = "";
+            } else {
+                lblName.innerHTML = "Name must start with uppercase letter".fontcolor('red').fontsize(2);
+            }
+        }
+        function VerifyEmail(){
+            var email = document.getElementById("txtEmail").value;
+            var lblEmail = document.getElementById("lblEmail");
+            if(email.indexOf("@")==-1){
+                lblEmail.innerHTML = "Invalid Email - Include @".fontcolor('red');
+            } else {
+                if(email.endsWith("gmail.com")){
+                    lblEmail.innerHTML = "";
+                } else {
+                    lblEmail.innerHTML = "You can use only gmail account".fontcolor('red').fontsize(2);
+                }
+            }
+        }
+        function VerifyCard(){
+            var card = document.getElementById("txtCard").value;
+            var imgCard = document.getElementById("imgCard");
+
+            if(card.startsWith("4455")) {
+                 imgCard.src = "../public/images/visa.jpg";
+            } else {
+                 imgCard.src = "../public/images/master.jpg";
+            }
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" onblur="VerifyName()" id="txtName"></dd>
+        <dd id="lblName"></dd>
+        <dt>Your Email</dt>
+        <dd><input type="text" onblur="VerifyEmail()" id="txtEmail"></dd>
+        <dd id="lblEmail"></dd>
+        <dt>Your Card Number</dt>
+        <dd style="width:230px"><input onkeyup="VerifyCard()" type="text" maxlength="16" id="txtCard"> <img width="50" height="20" align="right" id="imgCard"> </dd>
+    </dl>
+</body>
+</html>
+
+8. slice()        : It returns the chars between specified index. End index must be greater
+              than start index.
+       
+            Syntax:
+                    str.slice(startIndex, endIndex);
+                    str.slice(startIndex);        // up to end
+
+9. substr()    : It returns the number of chars from specified index.
+              It is unidirectional.
+
+            Syntax:
+                   str.substr(startIndex, numberOfChars);
+
+10. substring()    : It returns the chars between specified index, but it is bi-directional.
+
+             Syntax:
+                  str.substring(startIndex, endIndex)
+                  str.substring(7,15)    ;        start from 7 up to 15
+                  str.substring(7,0);            start from 7 up to 0
+                  str.substr(7,0);            // empty
+                  str.slice(7,0);                // invalid
+
+11. trimStart()    : It removes the leading spaces before string.
+
+12. trimEnd()    : It removes the leading spaces at the end of string.
+
+ 13. trim()        : It removes the leading spaces both directions.
+
+Syntax:
+        str.trim()
+        str.trimStart()    
+        str.trimEnd()
+
+Ex:
+<script>
+     var password = prompt("Enter password");
+     if(password.trim()=="admin"){
+        document.write("Successs");
+     } else {
+        document.write("Invalid");
+     }
+</script>
+
+14. split()        : It splits the string at specified delimiter and returns an array of strings.
+             
+Syntax:
+         var contacts = "john-john@gmail.com-9877737121, david-david@gmail.com-9922321342";
+
+         var [john, david] = contacts.split(' , ');
+
+Ex:
+<script>
+     var contacts = "john-john@gmail.com-9877737121, david-david@gmail.com-9922321342";
+     var [john, david] = contacts.split(',');
+
+     var [name, email, mobile] = john.split('-');
+     document.write(email + "<br>" + name);
+</script>
+
+Task: write a function that takes input of string and prints the string in sentence case.
+          [first letter in string must be uppercase letter]
+
+      function SentenceCase(str)
+      {
+               // your logic
+            // collect first char and convert to uppercase
+            // collect rest chars and convert to lowercase
+            // combine first and rest chars and print.
+      }
+
+      SentenceCase("weLcoMe TO javaScriPT");    // Welcome to javascript
+
+Ex:
+<script>
+     function SentenceCase(str){
+         var firstChar = str.charAt(0).toUpperCase();
+         var restChars = str.slice(1).toLowerCase();
+
+         document.write(`${firstChar + restChars}`);
+     }
+     SentenceCase("weLCOMe tO JavASCRIpt");
+</script>
+
+Ex:
+<script>
+     function Email(str){
+         var id = str.slice(0, str.indexOf("@"));
+         var domain = str.slice(str.indexOf("@")+1);
+         //  var [id, domain] = str.split('@');
+         
+         document.write(`Your Id  <b>${id}</b> registered at <i>${domain}</i><br>`);
+     }
+     Email("john123@gmail.com");
+     Email("samson_nit@outlook.com");
+     Email("hr@nareshit.in");
+     Email("info@flipkart.com");
+
+</script>
