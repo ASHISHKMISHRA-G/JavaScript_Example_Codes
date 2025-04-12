@@ -1,0 +1,145 @@
+API
+- Application Programming Interface
+- It provides business logic that handle communication between client & server.
+- It manages requests from and send relative response.
+- It can communicate with database and provide data understandable to every operating system and device.
+- It provides data in XML & JSON format.
+
+                              Fakestore API
+                         (https://fakestoreapi.com)            
+
+API Routes:
+
+    GET        /products                        returns all products [ { }, { } ]
+    GET        /products/1                    returns specific id product  { }
+    GET        /products/categories            returns all categories [ " " ]
+    GET     /products/category/electronics      returns specific category products [{},{}]
+
+                       
+                         Map Data Type
+
+- It is a key and value collection like object.
+- Key can be any type & value can be any type.
+- It provides implicit methods for manipulation.
+- Hence it is faster in interactions.
+
+Syntax:
+        var data = new Map();
+        data.set(key, value)
+        data.get(key)
+        data.delete(key)
+        data.clear()
+        data.has(key)
+        data.size
+        data.keys()
+        data.values()
+        data.entries()
+
+Ex:
+<script>
+    var data = new Map();
+    data.set("HTML", "It is a markup language");
+    data.set(1, ['Delhi', 'Hyd']);
+
+    data.delete(1);
+
+    for(var key of data.entries()){
+        document.write(key + "<br>");
+    }
+    document.write(`Total Count of Keys : ${data.size}`);
+</script>
+
+
+
+FAQ: What is difference between Object & Map?
+Ans:
+
+    Object                    Map
+    ---------------------------------------------------------
+    Key / Value collection        Key / Value collection
+   
+    Key is string type            Key can be any type
+
+    Value can be any type        value can be any type
+
+    Uses Explicit operators         It have implicit methods  & properties
+        for manipulation            for manipulation.
+
+    It is slow in interactions        It is faster in interactions.
+
+
+                            Date Type
+- JavaScript date and time values are handled by "Date()" constructor.
+- It allocates memory where you can store date and time values.
+
+Syntax:
+      var  today = new Date("year-month-day hrs:min:sec.milliSeconds");
+      var  today = new Date();        // stores current date and time
+
+- JavaScript provides various methods for accessing date & time.
+
+     getHours()            0 to 23
+     getMinutes()            0 to 59
+     getSeconds()            0 to 59
+     getDay()                0 to 6  (0=sunday)
+         getDate()            1 to 28, 30, 31
+         getMonth()            0 to 11 (0=Jan)
+     getFullYear()            2024
+     toLocaleDateString()
+     toDateString()
+     toLocaleTimeString()
+     toTimeString()
+
+- JavaScript provides setter methods to set new date and time.
+
+    setHours()
+    setMinutes()
+    setSeconds()
+    setDate()
+    setMonth()
+    setFullYear()
+
+Ex:
+<script>
+     var productName = "Samsung TV";
+     var price = 65000.55;
+     var mfd = new Date();
+     var weekdays = ["Sunday", "Monday", "Tuesday", "Wed", "Thu", "Fri", "Sat"];
+     var months = ["January", "Feb", "March", "April","May", "Jue", "July", "Aug", "Sep", "Oct", "Nov", "December"];
+
+     mfd.setMonth(0);
+     mfd.setDate(20);
+     mfd.setFullYear(2025)
+     document.write(` ${mfd.getDate()} ${months[mfd.getMonth()]} ${weekdays[mfd.getDay()]} ,  ${mfd.getFullYear()}`);
+</script>
+
+Note: Date & Time values are handled by using 3rd party library in real-world projects.
+      Popular 3rd party for date & time are : moment, dayjs, luxon
+
+                         Timer Events
+setTimeout()
+clearTimeout()
+setInterval()
+clearInterval()
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Timer(){
+            var now = new Date();
+            document.querySelector("h1").innerHTML = now.toLocaleTimeString();
+        }
+        function bodyload(){
+            setInterval(Timer,1000);
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h1 style="font-family: monospace; text-align: center;"></h1>
+</body>
+</html>
