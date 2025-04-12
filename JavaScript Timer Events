@@ -154,3 +154,105 @@ Ex:
     </div>
 </body>
 </html>
+
+
+Debounce
+    setTimeout()
+Throttle
+    setInterval()
+
+Ex: Fakestore API Products Slide Show
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function LoadProduct(id){
+             fetch(`https://fakestoreapi.com/products/${id}`)
+             .then(function(response){
+                 return response.json();
+             })
+             .then(function(product){
+                  document.getElementById("lblTitle").textContent = product.title;
+                  document.getElementById("imgProduct").src = product.image;
+                  document.getElementById("lblPrice").textContent = product.price.toLocaleString('en-us',{style:'currency', currency:'USD'});
+             })
+        }
+        function LoadProductAuto(){
+            productId++;
+            document.getElementById("seekBar").value = productId;
+            fetch(`https://fakestoreapi.com/products/${productId}`)
+             .then(function(response){
+                 return response.json();
+             })
+             .then(function(product){
+                  document.getElementById("lblTitle").textContent = product.title;
+                  document.getElementById("imgProduct").src = product.image;
+                  document.getElementById("lblPrice").textContent = product.price.toLocaleString('en-us',{style:'currency', currency:'USD'});
+             })
+        }
+        var productId = 1;
+        function NextClick(){
+            productId++;
+            LoadProduct(productId);
+            document.getElementById("seekBar").value = productId;
+        }
+        function PrevClick(){
+            productId--;
+            LoadProduct(productId);
+            document.getElementById("seekBar").value = productId;
+        }
+        function SeekBarChange(){
+            LoadProduct(document.getElementById("seekBar").value);
+        }
+        var thread;
+        function PlayClick(){
+            thread = setInterval(LoadProductAuto, 5000);
+            document.getElementById("lblStatus").textContent = "Playing.."
+        }
+        function PauseClick(){
+            clearInterval(thread);
+            document.getElementById("lblStatus").textContent = "Paused..";
+        }
+    </script>
+</head>
+<body onload="LoadProduct(1)" class="container-fluid d-flex justify-content-center">
+    <div class="card p-3 mt-4 w-50">
+        <div class="card-header text-center">
+            <div class="card-title" id="lblTitle"></div>
+        </div>
+        <div class="card-body row">
+            <div class="col-1 d-flex flex-column justify-content-center align-items-center">
+                <button onclick="PrevClick()" class="btn btn-dark bi bi-chevron-left"></button>
+            </div>
+            <div class="col-10 position-relative">
+                <div id="lblPrice" class="badge fs-4 position-absolute end-0 top-0 rounded rounded-circle bg-danger text-white"></div>
+                <img width="100%" height="350" id="imgProduct">
+                <div>
+                    <input onchange="SeekBarChange()" type="range" id="seekBar" class="form-range" min="1" max="20" value="1">
+                </div>
+            </div>
+            <div class="col-1  d-flex flex-column justify-content-center align-items-center">
+                <button onclick="NextClick()" class="btn btn-dark bi bi-chevron-right"></button>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button onclick="PlayClick()" class="btn btn-success bi bi-play"></button>
+            <button onclick="PauseClick()" class="btn btn-warning bi bi-pause ms-2"></button>
+            <div id="lblStatus" class="mt-2"></div>
+        </div>
+    </div>
+</body>
+</html>
+
+Variables
+Data Types
+- Primitive Types
+- Non Primitive
+- Date & Time
+- Timer Events
