@@ -1,0 +1,259 @@
+The IF Selector
+- Forward Jump
+- Simple Decision
+- Multi Level Decisions
+4. Multiple Choices
+- It is a decision making approach where more than one alternative is provided.
+- Every alternative have an individual action to perform.
+
+Syntax:
+    if (condition-1)
+    {
+        statements if condition-1 true;
+    }
+    else if (condition-2)
+    {
+        statements if condition-2 true;
+    }
+    else
+    {
+       statements if all conditions are false;
+    }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
+    <script>
+        var user = {
+            Email: "john11@gmail.com",
+            Mobile: "+919876543210",
+            Password: "john@123"
+        }
+        var flag;
+        function ContinueClick(){
+            var userid = document.getElementById("txtId").value;
+            var pwdContainer = document.getElementById("pwdContainer");
+            var idContainer = document.getElementById("idContainer");
+
+            if(userid===user.Email){
+                flag = `Your email ${userid} verified successfully - Link sent to Email`;
+                pwdContainer.style.display = "block";
+                idContainer.style.display = "none";
+
+            }
+            else if(userid===user.Mobile) {
+                flag = `Your mobile ${userid} verified and OTP sent to registered mobile`;
+                pwdContainer.style.display = "block";
+                idContainer.style.display = "none";
+            } else {
+                document.getElementById("lblUserError").innerHTML = `${userid} Not registered`;
+            }
+        }
+        function LoginClick(){
+            var pwd = document.getElementById("txtPwd").value;
+            if(pwd===user.Password) {
+                document.write(`<h2>${flag}</h2>`);
+            } else {
+                document.getElementById("lblPwd").innerHTML = "Invalid Password";
+            }
+        }
+    </script>
+</head>
+<body class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="mt-4">
+        <h3 class="bi bi-person-fill">Sign In</h3>
+        <div id="idContainer">
+            <label class="form-label fw-bold">Email or mobile phone number</label>
+            <div>
+                <input type="text" class="form-control" id="txtId">
+                <div class="text-danger" id="lblUserError"></div>
+            </div>
+            <div class="mt-4">
+                <button onclick="ContinueClick()" class="btn btn-warning w-100">Continue</button>
+            </div>
+        </div>
+        <div id="pwdContainer" style="display: none;">
+            <label class="form-label fw-bold">Password</label>
+            <div>
+                <input type="password" class="form-control" id="txtPwd">
+                <div class="text-danger" id="lblPwd"></div>
+            </div>
+            <div class="mt-3">
+                <button onclick="LoginClick()" class="btn btn-warning w-100">Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+Note: Multiple choices will not allows to check any block directly. It follows a hierarchy from top to bottom and checks every condition until the given is matching.
+      It is a delay process for compiling system if there are many conditions to verify.
+
+Switch Selector:
+- Switch is used to interrupt the flow of electrons in a circuit.
+- Switch refers to a selector switch.
+- It selects exactly the matching block and executes.
+- It improves the performance of application when it have to handle multiple choices.
+
+Syntax:
+    switch(value | expression)
+    {
+       case  value | expression:
+          statements;
+          jump;
+       default:
+          statements when case mismatch;
+          jump;
+    }
+
+- "Jump" can be "break" or "return".
+
+Ex:
+<script>
+    var n = parseInt(prompt("Enter Number"));
+
+    switch(n)
+    {
+        case 1:
+        document.write("One");
+        break;
+        case 2:
+        document.write("Two");
+        break;
+        case 3:
+        document.write("Three");
+        break;
+        case 4:
+        document.write("Four");
+        break;
+        default:
+        document.write("Please enter a value between 1 to 4 only");
+        break;
+    }
+</script>
+
+FAQ's:
+1. Can we define switch without default?
+A. Yes
+
+2. Can we define default above or between cases?
+A. Yes. Switch verifies the keyword not the order.
+
+3. Can we define case without break?
+A. Yes.
+
+Ex:
+<script>
+    var n = parseInt(prompt("Enter Number"));
+
+    switch(n)
+    {
+       
+        case 1:
+        document.write("One");
+        break;
+        case 2:
+        document.write("Two<br>");
+        case 3:
+        document.write("Three is free with two");
+        break;
+        case 4:
+        document.write("Four");
+        break;
+        default:
+        document.write("Please enter a value between 1 to 4 only");
+        break;
+    }
+</script>
+
+4. Can we define jump using "return"?
+A. Yes.
+
+5. What is difference between break & return?
+A. "break" stops the block execution but continues to compile.
+    "return" terminates the compiling process after block execution.
+
+Note: The statements defined after "return" keyword are not reachable to compiler.
+
+6. What is the data type supported for case?
+A. It is recommended to use number, string or Boolean.
+
+7. How to execute same block for multiple cases?
+A. You can configure multiple cases in a sequence.
+
+    case 1:
+    case 2:
+         statement on 1 & 2;
+         break;
+   
+Ex:
+<script>
+   function f1(){
+    var c = prompt("Enter Product");
+
+    switch(c)
+    {
+        case "tv":
+        case "mobile":
+        document.write(`You selected ${c} from electronics`);
+        break;
+        case "casuals":
+        case "boots":
+        document.write(`You selected ${c} from footwear`);
+        break;
+    }
+   }
+   f1();
+</script>
+
+Ex:
+<script>
+   function f1(){
+    var c = prompt("Enter Product");
+
+    switch(c.toLowerCase())
+    {
+        case "tv":
+        case "mobile":
+        document.write(`You selected ${c} from electronics`);
+        break;
+        case "casuals":
+        case "boots":
+        document.write(`You selected ${c} from footwear`);
+        break;
+        default:
+        document.write(`tv, mobile, casuals & boots are available`);
+        break;
+    }
+   }
+   f1();
+</script>
+
+Ex:
+<script>
+   function f1(){
+      var n = parseInt(prompt("Enter Number"));
+
+      switch(true)
+      {
+         case (n>=1 && n<=10):
+          document.write(`Your number ${n} is between 1 to 10`);
+          break;
+         case (n>=11 && n<=20):
+          document.write(`Your number ${n} is between 11 to 20`);
+          break;
+      }
+   }
+   f1();
+</script>
