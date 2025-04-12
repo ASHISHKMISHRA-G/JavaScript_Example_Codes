@@ -1,0 +1,208 @@
+Ex: Cascading Dropdown
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        select {
+            width: 150px;
+        }
+    </style>
+    <script>
+        var categories = ["Select Category", "Electronics", "Footwear", "Fashion"]
+
+        var electronics = ["Select Electronics", "Televisions", "Mobiles"];
+
+        var footwear = ["Select Footwear", "Casuals", "Sneakers", "Boots"];
+
+        var fashion = ["Select Fashion", "Kids Fashion", "Mens Fashion", "Womens Fashion"];
+
+        var products = [];
+
+        function LoadCategories(){
+             categories.map(function(category){
+                  var option = document.createElement("option");
+                  option.text = category;
+                  option.value = category;
+                  document.getElementById("lstCategories").appendChild(option);
+             })
+        }
+
+        function LoadProducts(){
+            document.getElementById("lstProducts").innerHTML = "";
+            products.map(function(product){
+                 var option = document.createElement("option");
+                 option.text = product;
+                 option.value = product;
+                 document.getElementById("lstProducts").appendChild(option);
+            })
+        }
+
+        function bodyload(){
+            LoadCategories();
+        }
+        function CategoryChange(){
+            var categoryName = document.getElementById("lstCategories").value;
+            switch(categoryName)
+            {
+                case "Electronics":
+                products = [...electronics];
+                LoadProducts();
+                break;
+                case "Footwear":
+                products = [...footwear];
+                LoadProducts();
+                break;
+                case "Fashion":
+                products = [...fashion];
+                LoadProducts();
+                break;
+                default:
+                products = ["Please Select Category"];
+                LoadProducts();
+                break;
+            }
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <dl>
+        <dt>Select Category</dt>
+        <dd>
+            <select id="lstCategories" onchange="CategoryChange()"></select>
+        </dd>
+        <dt>Select Product</dt>
+        <dd>
+            <select id="lstProducts"></select>
+        </dd>
+    </dl>
+</body>
+</html>
+
+Task:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        dt, dd {
+            margin-bottom: 10px;
+        }
+        input, select {
+            width: 150px;
+        }
+    </style>
+    <script>
+        function CountryChange(){
+             var country = document.getElementById("lstCountries").value;
+             var txtMobile = document.getElementById("txtMobile");
+             switch(country)
+             {
+                case "India":
+                    txtMobile.placeholder = "eg: +91 and 10 digits"
+                    break;
+                case "US":
+                    txtMobile.placeholder = "eg: +(1)(530) 456-5663";
+                    break;
+             }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Verify Your Mobile</legend>
+        <dl>
+            <dt> <img width="20" border="1" align="left" height="20" style="border-radius: 20px;"> Your Country</dt>
+            <dd>
+                <select id="lstCountries" onchange="CountryChange()">
+                    <option>Select Your Country</option>
+                    <option>India</option>
+                    <option>US</option>
+                    <option>UK</option>
+                </select>
+               
+            </dd>
+            <dt>Your Mobile Number</dt>
+            <dd>
+                <input type="text"  id="txtMobile">
+            </dd>
+        </dl>
+        <button>Verify</button>
+    </fieldset>
+</body>
+</html>
+
+Note : On Verify click it must verify the format of selected country mobile number.
+           On country change the mobile pattern must change.
+
+Task-1:  Write a function the find the range of value.
+
+    function  FindRange(value, min, max)
+    {
+        // IF value is in range of min & max
+           It must display - your value is in range.
+                               - else your value is out of range.    
+    }
+
+    FindRange(3, 10, 20);        // your value is out of range.
+    FindRange(3, 1, 10);        // your value is in range.
+    FindRange(22, 1, 10);        // your value is out of range
+
+Ex:
+<script>
+    function FindRange(value, min, max)
+    {
+        if(value>=min && value<=max) {
+             document.write(`Your value ${value} is in range of ${min} to ${max}`.fontcolor('green'));
+        } else {
+            document.write(`Your value ${value} is not in range of ${min} & ${max}`.fontcolor('red'));
+        }
+    }
+    FindRange(8, 1, 50);
+</script>
+   
+Task-2:  Write a program to find the greatest amount 3 numbers.
+
+    function FindGreatest(a, b, c)
+    {
+        // write the IF statement
+    }
+
+    FindGreatest(20, 10, 5);        //  a=20 is greater than b=10 & c=5
+    FindGreatest(20, 30, 10);    //  b=30 is greater than a=20 & c=10
+
+Ex:
+<script>
+    function FindGreatest(a, b, c)
+    {
+          if(a>b && a>c)
+          {
+             document.write(`a=${a} is greater than b=${b} & c=${c}`);
+          }
+          else if(b>c) {
+             document.write(`b=${b} is greater than a=${a} & c=${c}`);
+          } else {
+             document.write(`c=${c} is greater than a=${a} & b=${b}`);
+          }
+    }
+    FindGreatest(parseInt(prompt("Enter A")), parseInt(prompt("Enter B")), parseInt(prompt("Enter C")));
+</script>
+
+Task-3:
+Check if a triangle is equilateral, scalene, or isosceles
+
+function findTriangleType(side1, side2, side3)
+{
+           // if all sides are equal = Equilateral
+        // if any 2 side are equal = Isosceles
+        // if all 3 sides are different Scalene triangle
+}
+
+findTriangleType(12,12,12) //"Equilateral triangle."
+findTriangleType(20,20,31) //"Isosceles triangle."
+findTriangleType(5,4,3) //"Scalene triangle."
