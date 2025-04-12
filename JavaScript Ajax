@@ -1,0 +1,222 @@
+[ ]        Array
+{ }        Object
+[ { }, { } ]    Array of objects
+
+ProductId        Name    Price
+1            TV        24000
+2            Mobile    12000
+
+Products =
+[
+  {  ProductId: 1,  Name: "TV",  Price: 24000 },
+  {  ProductId: 2,  Name: "Mobile", Price: 12000 }
+]
+
+Mobile Price :  Products[1].Price
+
+                      JavaScript Ajax
+
+- Ajax is "Asynchronous JavaScript and XML".
+- Ajax enables "Partial Post Back".
+- It allows to load new content into page without reloading the page.
+- It improves the performance of application.
+- "Async" can make a request without blocking other requests.
+- XML is a medium used to transport data across requests.
+- In a browser AJAX requests are handled by using JavaScript  "XMLHttpRequest" object.
+
+Syntax:
+1. Create an XML Http Object.
+
+        var  http = new XMLHttpRequest();
+
+2. Configure request by using "open()" method.
+
+        http.open("request-method", "url", bool:async");
+
+            request-method    : GET, POST
+            url                : file location
+            async            : true / false [default is false]
+
+3. Send the request for execution.
+
+        http.send();
+
+4. Configure the process event to run the method and get the response.
+
+        http.onreadystatechange =  function() {
+
+        }
+
+            1    Initial
+            2    Success        => readyState
+            3    Complete
+            4    Ready
+
+
+5. In process function you have to verify if ready state is "4" and get the response.
+
+        if (http.readyState == 4)
+        {
+            // get the response and use response
+        }
+
+6. Response is provided in HTML, text or XML.
+
+        http.responseText
+        http.responseHTML
+        http.responseXML
+
+   If content is in any another format then you have to convert explicitly.
+
+Ex:
+1. Add a new folder by name "data" into project
+
+2. Add a new file into folder by name "help.txt"
+
+            help.txt
+    ... some content....
+
+3. Add a new HTML page in your project
+
+          project/javascript    => ajax-demo.html
+          project/data        => help.txt
+
+ajax-demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+             var now = new Date();
+             console.log(`Page loaded on ${now.toLocaleTimeString()}`);
+        }
+        function LoadClick(){
+           
+            var http = new XMLHttpRequest();
+
+            http.open("GET", "../data/help.txt", true);
+            http.send();
+
+            http.onreadystatechange = function(){
+
+                if(http.readyState==4){
+                     document.getElementById("container").innerHTML = http.responseText;
+                }
+
+            }
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <button onclick="LoadClick()">Load Help</button>
+    <div>
+        <pre id="container">
+
+        </pre>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+Ex:
+1. data/product.json
+
+{
+    "title": "Apple iPhone 15 (Black, 256 GB)",
+    "price": 78999,
+    "rating": {"rate":4.8, "ratings":228290, "reviews":8157},
+    "offers": [
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Bank OfferFlat ₹450 off on HDFC Bank Credit Card EMI Txns on 3 months tenure, Min. Txn Value: ₹5000T&C",
+        "Bank Offer10% off up to ₹750 on HDFC Bank Credit Card EMI on 6 and 9 months tenure. Min. Txn Value: ₹5000T&C",
+        "Special PriceGet extra ₹10901 off (price inclusive of cashback/coupon)T&C"
+    ],
+    "image": "../public/images/iphone-black.jpg"
+}
+
+
+2. flipkart.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+            var product = {title:"", price:0, rating:{rate:0, ratings:0, reviews:0}, offers:[], image:""};
+
+            var http = new XMLHttpRequest();
+
+            http.open("get", "../data/product.json", true);
+            http.send();
+
+            http.onreadystatechange = function(){
+
+                if(http.readyState==4){
+
+                    product = JSON.parse(http.responseText);
+
+                    document.getElementById("imgProduct").src = product.image;
+                    document.getElementById("lblTitle").innerHTML = product.title;
+                    document.getElementById("lblRatings").innerHTML = `<span class="badge bg-success">${product.rating.rate} <span class="bi bi-star-fill"></span> </span> <span class="fw-bold ms-2 text-secondary"> ${product.rating.ratings.toLocaleString('en-in')} ratings & ${product.rating.reviews.toLocaleString('en-in')} reviews </span> `
+                    document.getElementById("lblPrice").innerHTML = "&#8377;" + product.price.toLocaleString('en-in');
+
+                    product.offers.map(function(offer){
+                         var li = document.createElement("li");
+                         li.className = "bi bi-tag-fill my-3 text-success";
+                         li.innerHTML = `<span class="text-secondary"> ${offer} </span>`;
+                         document.getElementById("lstOffers").appendChild(li);
+                    })
+
+                }
+
+            }
+
+
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="row mt-4">
+        <div class="col-3">
+            <img id="imgProduct" width="100%">
+        </div>
+        <div class="col-9">
+             <div id="lblTitle" class="fs-4"></div>
+             <div id="lblRatings" class="my-2"></div>
+             <div id="lblPrice" class="my-4 h3"></div>
+             <div>
+                <h5>Available Offers</h5>
+                <ul class="list-unstyled" id="lstOffers">
+
+                </ul>
+             </div>
+        </div>
+    </div>
+</body>
+</html>
+
+Issues with XMLHttpRequest:
+- It is default synchronous.
+- You have to explicitly turn ON async.
+- It returns response only in XML, Text & HTML.
+- It requires explicit conversions of data.
+- It is not very good in error handling.
+
+Solution:
+- You can use JavaScript "fetch()" promise.
