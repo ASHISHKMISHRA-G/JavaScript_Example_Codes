@@ -22,3 +22,99 @@ Note: Several programming languages restrict array to same type of values and
       will not allow to change the size dynamically.
 
 - Array refers to an arrangement of values in specific sequence and allows access in random.
+
+
+                       Array Configuration
+
+Array
+- Reduce Overhead
+- Reduce Complexity
+- Handle any type of data
+- Size change dynamically
+- Arrange elements in sequence and allow to access random.
+
+Configuring Array:
+1. You have to declare array
+
+       var values;
+       let  values;
+       const values = initialization;
+
+2. You have to initialize or assign memory for array.
+
+3. Memory for array is defined using 2 techniques
+
+    a) [ ]            meta character
+    b) Array()        constructor
+
+    var values = [ ];                => Initialization of memory
+    var values = new Array();
+   
+              (or)
+
+    var values;
+    values = [ ];
+                                => Assignment of memory
+    var values;
+    values = new Array();
+
+FAQ: What is difference between "[ ]" & "Array()" ?
+Ans:   [ ] configures static memory.
+          Array() configures dynamic memory.
+
+FAQ: What is static memory?
+Ans:  It is continuous memory.
+         The memory allocated for first request will be same across multiple requests.
+     It is not safe and uses more memory.
+         It is good for continuous operations.
+
+FAQ: What is dynamic memory?
+Ans:  It is discreet memory.
+     Memory is newly allocated for every request.
+     Memory is destroyed after current request.
+     It is good for disconnected operations.
+
+Storing values & Reading values from Array:
+- Values are stored in array memory with reference of a "property".
+- Property is a string type that maps to memory index.
+
+
+Syntax:
+        var values = [ 10, "A", true ];
+
+        values["0"] = 20;        // valid
+        values[0] = 30;        // valid
+
+        console.log(values["1"]);        // valid    property
+        console.log(values[1]);        // valid    property
+
+- Array element can be any type
+        a) Primitive
+        b) Non Primitive
+        c) Function
+- If you have a function in array memory then it is accessed by using "IIFE" pattern.
+  [Immediately Invoking Function Expression].
+
+- A function in array memory will not have function name.
+- A function without name is known as "Anonymous" function.
+
+Syntax:
+    (
+      function(){ }
+    )();
+
+Ex:
+
+<script>
+     var values = [10, "John", true, ["Delhi", "Hyd"], function(){document.write("Hello ! from array")}];
+     document.write(values[3][1] + "<br>");
+     values[4]();
+</script>
+
+Ex:
+<script>
+     var values = [[[10, 20], ["A", "B"]]];
+
+     document.write(values[0][1][1]);
+</script>
+
