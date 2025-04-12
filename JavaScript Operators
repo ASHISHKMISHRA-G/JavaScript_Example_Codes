@@ -147,3 +147,36 @@ Ex:
      <p></p>
 </body>
 </html>
+
+
+Special Operators
+1. Ternary Operator  ?:
+
+2. "in" operator
+
+3. "delete" operator
+
+4. "new" operator
+
+5. "typeof" operator
+
+        var price = 5000;
+        var stock = true;
+
+        typeof  price;        //  number
+        typeof  stock;        // Boolean
+
+6. "instanceof"  operator  : It returns true if object is instance of given class.
+
+        class Employee { }
+
+        let obj = new Employee();
+
+        ${ obj  instanceof  Employee }    // true
+        ${ obj  instanceof  Array }        // false
+
+
+7. "void" operator    : It discards the return of a function.
+
+Syntax:
+    <a href="javascript:void()"> Home </a>
