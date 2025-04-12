@@ -1,0 +1,286 @@
+JavaScript "fetch()" promise:
+
+- Promise is a function with async techniques.
+- It uses async technique to resolve and reject.
+- Promise executes a resolve function on success and reject on failure.
+- Fetch is a JavaScript promise that uses "XMLHttpRequest" object.
+
+Syntax:
+    fetch("url")
+            .then(function(response){
+                // on success gets response from source
+                // response is in binary format
+            })
+            .then(function(data){
+                // can access the data converted from binary to native.
+            })
+            .catch(function(error){
+                // It executes on failure and collects the error
+             })
+            .finally(function(){
+                // It executes always - on success or on failure
+            })
+
+Ex:
+1. product.json
+
+{
+    "title": "Apple iPhone 15 (Black, 256 GB)",
+    "price": 78999,
+    "rating": {"rate":4.8, "ratings":228290, "reviews":8157},
+    "offers": [
+        "Bank Offer5% Unlimited Cashback on Flipkart Axis Bank Credit CardT&C",
+        "Bank OfferFlat ₹450 off on HDFC Bank Credit Card EMI Txns on 3 months tenure, Min. Txn Value: ₹5000T&C",
+        "Bank Offer10% off up to ₹750 on HDFC Bank Credit Card EMI on 6 and 9 months tenure. Min. Txn Value: ₹5000T&C",
+        "Special PriceGet extra ₹10901 off (price inclusive of cashback/coupon)T&C"
+    ],
+    "image": "../public/images/iphone-black.jpg"
+}
+
+
+2. demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+           
+                fetch("../data/product.json")
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(product){
+                     document.getElementById("imgProduct").src = product.image;
+                     document.getElementById("lblTitle").innerHTML = product.title;
+                     document.getElementById("lblRatings").innerHTML = `<span class="badge bg-success"> ${product.rating.rate} <span class="bi bi-star-fill"></span> </span> <span class="text-secondary fw-bold"> ${product.rating.ratings.toLocaleString('en-in')} ratings & ${product.rating.reviews.toLocaleString('en-in')} reviews</span>`;
+                     document.getElementById("lblPrice").innerHTML = "&#8377;" + product.price.toLocaleString('en-in');
+
+                     product.offers.map(function(offer){
+                          var li = document.createElement("li");
+                          li.className = "my-3 bi bi-tag-fill text-success";
+                          li.innerHTML = `<span class="text-secondary">${offer}</span>`;
+                          document.getElementById("lstOffers").appendChild(li);
+                     });
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+                .finally(function(){
+                    console.log('Request End');
+                })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="row mt-4">
+        <div class="col-3">
+            <img id="imgProduct" width="100%">
+        </div>
+        <div class="col-9">
+             <div id="lblTitle" class="fs-4"></div>
+             <div id="lblRatings" class="my-2"></div>
+             <div id="lblPrice" class="my-4 h3"></div>
+             <div>
+                <h5>Available Offers</h5>
+                <ul class="list-unstyled" id="lstOffers">
+
+                </ul>
+             </div>
+        </div>
+    </div>
+</body>
+</html>
+
+Ex: Collection of Objects
+
+1. products.json
+
+[
+    {
+        "title": "Apple Iphone 15 (Black 128 GB)",
+        "image": "../public/images/iphone-black.jpg",
+        "price": 65999
+    },
+    {
+        "title": "Apple Iphone 15 (Green 256 GB)",
+        "image": "../public/images/iphone-green.jpg",
+        "price": 75999
+    }
+]
+
+2. demo.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+             fetch("../data/products.json")
+             .then(function(response){
+                 return response.json();
+             })
+             .then(function(products){
+                   products.map(function(product){
+                        var tr = document.createElement("tr");
+                        var tdTitle = document.createElement("td");
+                        var tdPrice = document.createElement("td");
+                        var tdImage = document.createElement("td");
+
+                        tdTitle.innerHTML = `<span class="h5">${product.title}</span>`;
+                        tdPrice.innerHTML = product.price.toLocaleString('en-in');
+                        tdImage.innerHTML = `<img src=${product.image} width="100" height="100">`;
+
+                        tr.appendChild(tdTitle);
+                        tr.appendChild(tdPrice);
+                        tr.appendChild(tdImage);
+
+                        document.querySelector("tbody").appendChild(tr);
+                   })
+             })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <section>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Preview</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
+
+Ex: Nasa API   [ api.nasa.gov ]
+
+https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY
+
+Table Presentation:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+            fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY&quot;)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(marsObj){
+                 marsObj.photos.map(function(photo){
+                      var tr = document.createElement("tr");
+                      var tdId = document.createElement("td");
+                      var tdPreview = document.createElement("td");
+                      var tdCamera = document.createElement("td");
+                      var tdRover = document.createElement("td");
+
+                      tdId.innerHTML = photo.id;
+                      tdPreview.innerHTML = `<a href=${photo.img_src} target="_blank"><img src=${photo.img_src} width="200" height="200"></a>`;
+                      tdCamera.innerHTML = photo.camera.full_name;
+                      tdRover.innerHTML = photo.rover.name;
+
+                      tr.appendChild(tdId);
+                      tr.appendChild(tdPreview);
+                      tr.appendChild(tdCamera);
+                      tr.appendChild(tdRover);
+
+                      document.querySelector("tbody").appendChild(tr);
+                 })
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <h2>Mars Rover Photos</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th> Photo Id </th>
+                <th class="bi bi-eye"> Preview</th>
+                <th class="bi bi-camera"> Camera</th>
+                <th class="bi bi-rocket"> Rover </th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+
+Ex: Cards
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function bodyload(){
+            fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=6ffzhNjjV1XA2HkP9u2ghEmZVMK8Rb2M2ZG4n6Fl&quot;)
+            .then(function(response){
+                 return response.json();
+            })
+            .then(function(marsObj){
+                 
+                marsObj.photos.map(function(photo){
+                     
+                      var div = document.createElement("div");
+                      div.className = "card m-2 p-2";
+                      div.style.width = "200px";
+                      div.innerHTML = `
+                         <a href=${photo.img_src} target="_blank"><img class="card-img-top" src=${photo.img_src} height="150"></a>
+                         <div class="card-header fw-bold">
+                            ${photo.id}
+                         </div>
+                         <div class="card-body">
+                            <dl>
+                                <dt class="bi bi-camera"> Camera</dt>
+                                <dd> ${photo.camera.full_name} </dd>
+                                <dt class="bi bi-rocket"> Rover </dt>
+                                <dd> ${photo.rover.name} </dd>
+                            </dl>
+                         </div>
+                      `;
+
+                      document.querySelector("section").appendChild(div);
+
+                })
+
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <h2>Mars Rover Photos</h2>
+    <section class="d-flex flex-wrap">
+       
+    </section>
+</body>
+</html>
