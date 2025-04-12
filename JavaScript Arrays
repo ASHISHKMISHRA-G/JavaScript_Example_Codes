@@ -1,0 +1,24 @@
+ Non Primitive Types
+- They are mutable types.
+- They don't have a fixed range for value.
+- The value range changes according to memory available.
+- They are stored in a heap memory.
+- You can access in random.
+
+    1. Array
+    2. Object
+    3. Map
+    4. Set (Obsolete)
+
+
+                                Array
+- Arrays are used in computer programming to reduce overhead and complexity.
+- Array can reduce overhead by storing values in sequential order.
+- Array reduces complexity by storing multiple values under one name.
+- Array can handle different types of values in sequential order.
+- Array size can change dynamically.
+
+Note: Several programming languages restrict array to same type of values and
+      will not allow to change the size dynamically.
+
+- Array refers to an arrangement of values in specific sequence and allows access in random.
