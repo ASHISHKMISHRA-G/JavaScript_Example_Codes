@@ -1,0 +1,149 @@
+                       JavaScript Operators
+
+- In computer programming operator is an object that handles data and its manipulation.
+- It stores the data in operands and returns specific value using a operation.
+- Operators are classified into various types based on the number of operands they can handle.
+        1. Unary Operator
+        2. Binary Operator
+        3. Ternary Operator
+
+- Unary operator performs operation using one operand.
+
+        x++        Increment
+        x--        Decrement
+       
+- Binary operator performs operation using two operands
+       
+        x + y
+        x - y
+        etc..
+
+- Ternary operator performs operation using three operands
+       
+        (condition)?true:false
+
+- Based on the type of value an operator returns, it is classified into following types
+
+1. Arithematic operators  [ return number ]
+
+        +    Addition
+        -     Subtraction
+        *    Multiplication
+        /    Division
+        %    Modulus
+        **    Power  [Math.pow()]
+       
+ Syntax:
+        string + string         => string
+        string + number    => string
+        string + Boolean    => string
+        number+number    => number
+        number+boolean     => number        true + 10 => 11
+        boolean+boolean    => number        true + true => 2
+
+        string - string        => NaN
+        boolean-number    =>  number
+        boolean-boolean    => number
+
+        string * string        => NaN
+        string / string        => NaN
+        string % string        => NaN
+
+2. Comparison Operators  [Boolean]
+
+        >        Greater than
+        >=        Greater than or equal
+        <        Less than
+        <=        Less than or equal
+        ==        Equal
+        !=        Not Equal
+        ===        Identical Equal
+        !==        Not Identical
+
+FAQ: What is difference between "==" & "===" ?
+Ans :  "==" can compare values of different data type.
+      "===" can compare only the values of same data type.
+
+Syntax:
+         10 == "10"        => true
+         10 === "10"        => false
+
+
+3. Logical Operators
+
+        &&        AND
+        ||        OR
+        !        NOT
+
+        (expression-1)      &&  (expression-2)    => true if both expressions are true
+        (expression-1)   ||  (expression-2)        => true if any one expression is true
+
+        !true                                => false
+        !undefined                        => defined
+        !null                                => having a value
+
+EX
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function SubmitClick(){
+               var password = document.getElementById("txtPwd").value;
+               var otp = document.getElementById("txtOtp").value;
+               if(password==="admin" && otp==="3344") {
+                    document.write("Success..");
+               } else {
+                    alert("Invalid Details");
+               }
+          }
+     </script>
+</head>
+<body>
+     <dl>
+          <dt>Password</dt>
+          <dd><input type="password" id="txtPwd"></dd>
+          <dt>OTP</dt>
+          <dd><input type="text" id="txtOtp"></dd>
+     </dl>
+     <button onclick="SubmitClick()">Submit</button>
+</body>
+</html>
+
+4. Assignment Operators
+
+        +=            Add and assign
+        -=            Subtract and assign
+        *=            Multiply and assign
+        /=            Divide and assign
+        %=            Modulus and assign
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function PostClick(){
+               var now = new Date();
+               var comments = document.getElementById("txtComments").value;
+               document.querySelector("p").innerHTML += `${comments} - ${now.toLocaleTimeString()}<br>`;
+          }
+     </script>
+</head>
+<body>
+     <fieldset>
+          <legend>Your Comments</legend>
+          <div>
+               <textarea rows="4" id="txtComments" cols="40"></textarea>
+          </div>
+          <button onclick="PostClick()">Post Comments</button>
+     </fieldset>
+     <h4>Review Comments</h4>
+     <p></p>
+</body>
+</html>
