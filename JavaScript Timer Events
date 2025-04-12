@@ -1,0 +1,156 @@
+Timer Events
+- setTimeout()
+- clearTimeout()
+- setInterval()
+- clearInterval()
+
+
+setTimeout():
+- It is used to control "de-bounce".
+- De-bounce is a mechanism where you can lock the task and keep it inactive for a specific duration of time.
+- It allows any another task in the process to complete.
+
+Syntax:
+    setTimeout(function(){}, interval);
+
+- Interval specifies the sleep interval in milliseconds.
+- Timeout will remove the task from memory and release into process.
+- Hence every task is performed only once.
+
+clearTimeout():
+- It removes a task from memory before releasing into process.
+- It requires a memory reference name for the task loaded into memory.
+
+Syntax:
+        var  task  = setTimeout(function(){}, interval);
+
+        clearTimeout(task);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+        function Step1(){
+            document.querySelector("p").innerHTML = "Increased by 30%";
+        }
+        function Step2(){
+            document.querySelector("p").innerHTML = "Increased by 70%";
+        }
+        function Step3(){
+            document.querySelector("p").innerHTML = "Increased by 100%";
+        }
+        var s1, s2, s3;
+        function VolumeClick(){
+           s1 = setTimeout(Step1, 3000);
+           s2 = setTimeout(Step2, 6000);
+           s3 = setTimeout(Step3, 10000);
+        }
+        function CancelClick(){
+            clearTimeout(s2);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="VolumeClick()" class="bi bi-volume-up-fill"></button>
+    <button onclick="CancelClick()" class="bi bi-volume-mute-fill"></button>
+    <p></p>
+</body>
+</html>
+
+setInterval():
+- It is used to control "throttle".
+- It is a mechanism where the task is executed repeatedly until removed from memory.
+- It loads the task into memory and releases a copy of task into process at regular time intervals.
+
+Syntax:
+    setInterval(function(){}, interval);
+
+clearInterval():
+- It removes the task from memory that is loaded for "throttle".
+- It requires a memory reference name.
+
+Syntax:
+      var task = setInterval(function(){}, interval);
+      clearInterval(task);
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        progress {
+            width: 300px;
+            height: 30px;
+        }
+        @keyframes Fade {
+            from {
+                opacity: 0;
+                transform: scale(0.2);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+    <script>
+        var count = 0;
+        function ProgressStart(){
+            count++;
+            document.querySelector("progress").value = count;
+            document.getElementById("lblStatus").innerHTML = `${count} % completed`;
+            if(count==100){
+                clearInterval(task);
+               
+                document.getElementById("imageContainer").style.display = "block";
+                document.getElementById("imageContainer").style.animationName = "Fade";
+                document.getElementById("imageContainer").style.animationDuration = "5s";
+               
+                document.getElementById("progressContainer").style.display = "none";
+            }
+        }
+        var task;
+        function LoadClick(){
+            document.getElementById("btnContainer").style.display = "none";
+            document.getElementById("progressContainer").style.display = "block";
+            task = setInterval(ProgressStart,100);
+        }
+        function PauseClick(){
+            clearInterval(task);
+            document.getElementById("lblStatus").innerHTML = `${count} % Paused`;
+        }
+        function PlayClick(){
+            task = setInterval(ProgressStart,100);
+        }
+    </script>
+</head>
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height:100vh">
+    <div class="text-center">
+        <div id="btnContainer">
+            <button class="btn btn-primary" onclick="LoadClick()"> Load Image </button>
+        </div>
+        <div id="progressContainer" style="display: none;">
+            <progress min="1" max="100"></progress>
+            <div class="my-3">
+                <button onclick="PlayClick()" class="btn btn-success bi bi-play"></button>
+                <button onclick="PauseClick()" class="btn btn-danger bi bi-pause ms-2"></button>
+            </div>
+            <p id="lblStatus"></p>
+        </div>
+        <div id="imageContainer" style="display: none;">
+            <img src="../public/images/women-shop.jpg" width="300" height="400">
+        </div>
+    </div>
+</body>
+</html>
