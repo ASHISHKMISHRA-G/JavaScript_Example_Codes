@@ -1,0 +1,246 @@
+Object
+- Object is used to keep all related data and logic together.
+- "Alan Kay" introduced the concept of object into computer programming in early 1960's.
+- Object enables reusability, separation, extensibility, maintainability etc.
+- Technically object is a key and value collection.
+
+        {
+           Key  :  value,
+           Key  :  value    
+        }
+
+- Key is always string type.
+- Value can be any type
+    a) Primitive
+    b) Non Primitive
+    c) Function
+
+- The keys are accessed within object by using  "this" keyword, which refers to current context memory. [object memory]
+
+- You can access keys outside by using object name.
+
+Syntax:
+           {
+              Name: " ",
+              Price : 0,
+              Print : function() {
+               // this.Name
+               // this.Price
+              }
+           }
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Stock: true,
+        Cities: ["Delhi", "Hyd"],
+        Rating: {Rate:4.5, Count:5660},
+        Print: function(){
+              document.write(`Name=${this.Name}<br>Price=${this.Price}<br>Stock=${this.Stock}<br>Cities=${this.Cities.toString()}<br>Rating=${this.Rating.Rate}[${this.Rating.Count}]`);
+        }
+    }
+    tv.Print();
+    document.write("<hr>");
+    tv.Name = "Samsung LED TV",
+    tv.Price = 60000.44;
+    tv.Cities.push("Mumbai");
+    tv.Rating.Rate = 4.8;
+    tv.Print();
+</script>
+
+
+- Keys reference can be using "." member invoking operator or by using destructure technique.
+
+            objectName.Key
+            objectName[Key]
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+        Cities: ["Delhi", "Hyd"],
+        Rating: {Rate:4.5, Count:5660},
+        Total : function(){
+              return this.Qty * this.Price;
+        },
+        Print: function(){
+              document.write(`Name=${this.Name}<br>Price=${this.Price}<br>Total=${this.Total()}<br>Stock=${this.Stock}<br>Cities=${this.Cities.toString()}<br>Rating=${this.Rating.Rate}[${this.Rating.Count}]`);
+        }
+    }
+    tv.Qty = parseInt(prompt("Enter Quantity"));
+    tv.Print();
+   
+</script>
+
+Object Manipulations:
+
+1. How to read all keys from object?
+A. You can use
+    a) for..in                Iterator
+    b) Object.keys()         Method
+
+Syntax:
+    for(var key in object)
+    {
+    }
+
+    Object.Keys(object)    // returns [ ] of keys
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+      }
+      for(var key in tv){
+         document.write(`${key} : ${tv[key]} <br>`);
+      }
+</script>
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+      }
+      Object.keys(tv).map(function(key){
+          document.write(`${key} : ${tv[key]} <br>`);
+      })
+</script>
+
+2. How to find a key in object?
+A. By using "in" operator
+
+Syntax:
+        "key"  in  object;        // true if key is available
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+      }
+     tv.Rating = 4.6;
+    if("Rating" in tv) {
+       document.write(`Rating=${tv.Rating}`);
+    } else {
+       document.write(`Rating Not Available`);
+    }
+</script>
+
+3. How to add a new key?
+A. You can append keys dynamically to object.
+
+Syntax:
+        var tv = { Name : "TV", Price: 56000.44 };
+        tv.Rating = 4.5;            // adds a new Key called Rating
+
+4. How to remove a key from object?
+A. By using "delete" operator
+
+Syntax:
+        delete  object.Key;
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+        Rating: 4.6
+      }
+      delete tv.Rating;
+    if("Rating" in tv) {
+       document.write(`Rating=${tv.Rating}`);
+    } else {
+       document.write(`Rating Not Available`);
+    }
+</script>
+
+5. How to get the count of all keys?
+A. Object.keys(object).length
+
+Ex:
+<script>
+    var tv = {
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+        Rating: 4.6
+      }
+    document.write(`Total Count of Keys : ${Object.keys(tv).length}`)
+</script>
+
+6. How to hide any key?
+A. By using "Symbol" data type.
+
+Syntax:
+     var  key = Symbol();
+
+     var obj = {
+        [key] : value
+      }
+
+Ex:
+<script>
+
+    var Id = Symbol();
+
+    var tv = {
+        [Id] : 2,
+        Name : "Samsung TV",
+        Price: 45000.55,
+        Qty: 1,
+        Stock: true,
+        Rating: 4.6
+      }
+     Object.keys(tv).map(function(key){
+       document.write(`${key}<br>`);
+     })
+
+     document.write(`Product Id : ${tv[Id]}`);
+</script>
+
+7. How to configure hidden fields in a HTML form?
+A. By using input type "hidden".
+
+Syntax:
+    <input type="hidden"  name="User"  value="john">
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+</head>
+<body>
+       <form>
+              <dl>
+                     <input type="hidden" name="User" value="John_nit">
+                     <dt>Password</dt>
+                     <dd><input type="password" name="Password"></dd>
+                     <dt>Confirm</dt>
+                     <dd><input type="password" name="Confirm"> </dd>
+              </dl>
+              <button>Submit</button>
+       </form>
+</body>
+</html>
+
+
+Note: If JavaScript object is configured only to represent data then it is referred as "JSON". [JavaScript Object Notation].
