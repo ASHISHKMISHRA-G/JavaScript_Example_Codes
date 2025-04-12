@@ -23,7 +23,7 @@ Note: Several programming languages restrict array to same type of values and
 
 - Array refers to an arrangement of values in specific sequence and allows access in random.
 
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                        Array Configuration
 
 Array
@@ -118,3 +118,253 @@ Ex:
      document.write(values[0][1][1]);
 </script>
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+       Array Methods & Properties
+
+1. length            : It returns the total count of elements in array.
+
+Syntax:
+     var values = [10, "A", true];
+     values.length;                // 3
+
+2. Reading Array Elements
+
+        toString()            It returns all elements separated with "," delimiter.
+        join()            It returns all elements with custom delimiter.
+        map()            It returns all elements & index using iterator.
+        forEach()            It is also same as map(), but map is a generator,
+                        map is faster than forEach.
+Syntax:
+    values.toString()
+    values.join( " > " );
+   
+    values.map(function(value, index){         Async
+
+    })        
+
+    values.forEach(function(value, index){        Sync
+
+    })
+
+Ex:
+<script>
+     var categories = ["All", "Electronics", "Fashion", "Footwear"];
+
+     document.write(categories.join(' / '));
+</script>
+
+Ex:
+<script>
+     var categories = ["All", "Electronics", "Fashion", "Footwear"];
+
+     categories.map(function(value, index){
+          document.write(`[${index}][${typeof index}]:${value}<br>`);
+     });
+
+     categories.forEach(function(value, index){
+          document.write(`[${index}][${typeof index}]:${value}<br>`);
+     })
+</script>
+
+3. Reading Specific set of Elements
+
+        slice()        It reads and returns elements between specified index.
+        find()        It reads and return the first occurrence element that matches
+                    given condition.
+        filter()        It reads and returns all elements that match given condition.
+
+Syntax:
+    values.slice(startIndex, endIndex)
+
+    values.find(function(value){            // return only one element
+
+            return  value_condition;
+
+    })
+
+    values.filter(function(value){            // returns all elements that match condition
+
+        return value_condition;
+    })
+   
+Ex:
+<script>
+     var sales = [50000, 32000, 67000, 24560, 47000, 72000];
+
+     var result =  sales.filter(function(value){
+          return value>60000;
+     });
+
+     document.write(result.toString());
+</script>
+
+
+4. Reading Elements using explicit techniques
+
+    for..in        It reads every property from collection.
+
+    for..of        It reads every value from collection.
+
+    loop            It uses condition, counter and initialization.
+                [for, while, do while]
+
+
+Syntax:
+      for( var property in values )
+      {
+      }
+
+      for( var value of values )
+      {
+      }
+
+      for(var i=0; i<values.length; i++)
+      {
+      }
+
+Ex:
+<script>
+     var sales = [50000, 32000, 67000, 24560, 47000, 72000];
+
+     for(var property in sales){
+
+          document.write(`${property} : ${sales[property]} <br>`);
+
+     }
+</script>
+
+
+5. Sorting Elements
+   
+    sort()        It arranges elements in ascending order
+    reverse()        It arranges elements in reverse order
+
+Syntax:
+     values.sort()
+     values.reverse()
+
+Ex:
+<script>
+     var cities = ["Hyd", "Bangalore", "Mumbai", "Delhi", "Goa", "Chennai"];
+
+     cities.sort();
+     cities.reverse();
+     cities.map(function(city){
+          document.write(city + "<br>");
+     })
+</script>
+
+6. Adding elements into array
+
+      push()        Adds new element(s) as last item.
+      unshift()         Adds new element(s) as first item.
+      splice()        Adds new element(s) at specific position.
+
+Syntax:
+      values.push("item1", "item2", ...)
+      values.unshift("item1", "item2", ..)
+      values.splice(startIndex, count_of_items_to_remove, "Item1", "Item2",..)
+
+Note: Set delete count always zero for splice while adding elements.
+
+Ex:
+<script>
+     var cities = ["Hyd", "Bangalore"];
+
+     cities.splice(1, 0 ,"Delhi", "Chennai");
+     cities.map(function(city, index){
+          document.write(`[${index}] : ${city} <br>`);
+     })
+</script>
+
+7. Removing Elements from Array
+
+      pop()            Removes and returns the last element
+      shift()            Removes and returns first element
+      splice()            Removes and returns elements from specific index.
+
+Syntax:
+    values.pop()
+    values.shift()
+    values.splice(indexNumber, deleteCount)
+
+Ex:
+<script>
+     var cities = ["Hyd", "Bangalore", "Delhi", "Chennai"];
+
+     
+     alert(`${cities.splice(1,2)} Removed`);
+     
+     cities.map(function(city, index){
+          document.write(`[${index}] : ${city} <br>`);
+     })
+</script>
+
+8. Finding Element in Array
+
+    indexOf()            It returns index number of element in array.
+    lastIndexOf()        It returns last occurrence index number of element in array
+
+Note: If element not found then it returns -1.
+
+
+Syntax:
+     values.indexOf("element");        // 0, -1
+
+
+Adding Elements into Page dynamically:
+
+1. You have to create a new element and store in memory reference.
+
+    - Elements are created by using "document.createElement()"
+
+Syntax:
+        var opt = document.createElement("option");
+        var pic = document.createElement("img");
+        var tab = document.createElement("table");
+
+2. Set properties for element
+
+        opt.text = " "
+        opt.value= " "
+        pic.src=" "
+        tab.border="1"
+
+3. Add element into page by using "appendChild()" method, you can add into any
+    container that is relative to the child element.
+
+        document.querySelector("select").appendChild(opt);
+        document.querySelector("body").appendChild(pic);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script>
+          function bodyload(){
+               var opt1 = document.createElement("option");
+               var opt2 = document.createElement("option");
+
+               opt1.text = "Delhi";
+               opt2.text = "Hyd";
+
+               document.querySelector("select").appendChild(opt1);
+               document.querySelector("select").appendChild(opt2);
+
+               var pic = document.createElement("img");
+               pic.src= "../public/images/women-fashion.jpg";
+               pic.width="200";
+               pic.height="200";
+
+               document.querySelector("main").appendChild(pic);
+          }
+     </script>
+</head>
+<body onload="bodyload()">
+     <select></select>
+     <main></main>
+</body>
+</html>
