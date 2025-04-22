@@ -81,3 +81,190 @@ Syntax:
     {
     }
     Name(actual);            formal = actual;
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Functions
+- Declaration
+- Expression
+- Definition
+- Signature
+
+Function Parameters:
+- Params
+- Actual Params
+- Formal Params
+
+Parameter Value Type:
+- A parameter can handle any type of value.
+- It can be
+    a) Primitive Type
+    b) Non Primitive Type
+    c) Function Type
+
+Ex:
+<script>
+    function PrintList(collection)
+    {
+         collection.map(function(item){
+             document.write(item + "<br>");
+         })
+    }
+    PrintList(["A","B","C"]);
+    PrintList([10,20,40,50,60]);
+</script>
+
+
+Ex:
+<script>
+    function PrintObjectDetails(obj)
+    {
+        Object.keys(obj).map(function(key){
+             document.write(`${key} : ${obj[key]}<br>`);
+        })
+    }
+    PrintObjectDetails({Name:"TV", Price:56000.44});
+    PrintObjectDetails({Id:1, Name:"John", Designation: "Manager"});
+</script>
+
+FAQ: What are higher order functions?
+Ans:  Higher order function refers to a function that take another function as parameter.
+     The functionality of a function is modified by another function.
+
+Syntax:
+    function Name(f1, f2)
+    {
+         f1(params);
+         f2(params);
+    }
+
+    Name(function(ref){}, function(ref){})
+
+Ex:
+<script>
+    function Validate(success, failure){
+         var password = prompt("Enter Password");
+         if(password==="admin"){
+             success('Login Success');
+         } else {
+             failure('Invalid Password');
+         }
+    }
+    Validate(function(response){document.write(response)}, function(error){document.write(error)})
+</script>
+
+FAQ: What is callback?
+Ans: Callback is a technique of configuring a function as parameter so that
+     it is executed according to the state and situation.
+
+Syntax:
+        collection.map(function() {  });    // this is a callback function.
+   
+     Map is an higher order function having a callback.
+
+
+Multiple Parameters:
+- A function can have more than one parameter.
+- Every parameter is mandatory and have order dependency.
+
+Ex:
+<script>
+    function Details(id, name, price)
+    {
+        if(name===""){
+            document.write(`Id=${id}<br>Price=${price}`);
+        } else {
+            document.write(`Id=${id}<br>Name=${name}<br>Price=${price}`);
+        }
+   
+    }
+    Details(1, "TV", 55000.44);
+</script>
+
+- A function can allow max 1024 params according to ECMA standards.
+- Using lot of parameters is not safe for application. It may lead to "Injection Attacks".
+
+Rest Parameters:
+- JavaScript ES5+ versions allow REST parameter.
+- REST is a single formal parameter that can handle multiple arguments in a function.
+- REST is defined "...paramName".
+- REST parameter is array type.
+
+Syntax:
+     function Name(...param)
+     {
+        param[0] = arg1;
+        param[1] = arg2;
+     }
+     Name (arg1, arg2);
+
+EX:
+<script>
+    function Details(...product)
+    {
+        var [id, name, price, rating] = product;
+        document.write(`id=${id}<br>name=${name}<br>price=${price}<br>rating=${rating}`);
+    }
+    Details(1, "TV", 45000.33, 4.2);
+</script>
+
+- Function can have only one REST parameter.
+- A Rest parameter must be the last parameter in formal list when it is used with other parameters.
+
+Ex:
+<script>
+    function Details(title, ...product)
+    {
+        var [id, name, price, rating] = product;
+        document.write(`<h2>${title}</h2>id=${id}<br>name=${name}<br>price=${price}<br>rating=${rating}`);
+    }
+    Details("Product Details", 1, "TV", 45000.33, 4.2);
+</script>
+
+FAQ: Why rest parameter must be last?
+Ans:   It uses a iterator that reads every parameter and terminates the compiling.
+      Hence any parameter after rest is not reachable to compiler.
+
+Default Parameters:
+- JavaScript ES6 supports default parameters.
+- A parameter in function can have a default value.
+- If value is not defined then it takes the default value.
+- The default value is used when the argument actual parameter is undefined.
+
+Syntax:
+    function Name(param=value)
+    {
+    }
+
+    Name(undefined);
+
+Spread Operator in Function:
+- A function can have multiple parameters.
+- You can configure one argument that spreads into multiple parameters.
+- It requires JavaScript spread operator "..."
+- The argument must be an array type.
+
+Syntax:
+    function Name(param1, param2, param3)
+    {
+    }
+
+    Name( ...[val1, val2, val3] );
+
+Ex:
+<script>
+    function Details(id, name, price, rating)
+    {
+        document.write(`id=${id}<br>name=${name}<br>price=${price}<br>rating=${rating}`);
+    }
+    var product = [1, "TV", 33000, 4.2];
+    Details(...product);
+</script>
+
+FAQ: What is difference between spread and rest?
+Ans:  "rest" is single formal parameter that allows multiple arguments.
+     "spread" is single actual parameter that spreads into multiple formal parameters.
+
+Note: "Rest" is about formal parameters
+      "Spread" is about actual parameters
+
+-------------------------------------------------------------------------------------------------------------------------------------------
