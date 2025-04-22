@@ -1,0 +1,328 @@
+Browser Events
+- Mouse Events
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function GetPosition(e){
+            var img = document.querySelector("img");
+            img.style.position = "fixed";
+            img.style.top = e.clientY + "px";
+            img.style.left = e.clientX + "px";
+        }
+    </script>
+</head>
+<body onmousemove="GetPosition(event)">
+    <div style="height: 1000px;">Move mouse pointer to test</div>
+    <img src="../public/images/flag.gif" width="50" height="50">
+</body>
+</html>
+
+Keyboard Events:
+        onkeyup
+        onkeydown
+        onkeypress
+
+ - KeyUp & Keydown are used to handle the chars.
+ - Keypress is used to handle the char ASCII code.
+ - Key Event argument properties are
+        a) keyCode
+        b) charCode
+        c) which
+        d) ctrlKey
+        e) altKey
+        f) shiftKey  etc..
+
+Ex:
+data/users.json
+
+[
+    {
+        "UserId": "john"
+    },
+    {
+        "UserId": "john12"
+    },
+    {
+        "UserId": "john_nit"
+    },
+    {
+        "UserId": "david"
+    }
+]
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function VerifyUser(){
+            var userid = document.getElementById("txtId").value;
+            var lblUserError = document.getElementById("lblUserError");
+
+            fetch("../data/users.json")
+            .then(response=> response.json())
+            .then(users=>{
+                 for(var user of users){
+                    if(user.UserId===userid){
+                        lblUserError.innerHTML = "User Id Taken - Try Another".fontcolor('red');
+                        break;
+                    } else {
+                        lblUserError.innerHTML = "User Id Available".fontcolor('green');
+                    }
+                 }
+            })
+        }
+        function VerifyCaps(e){
+            console.log(e.keyCode + "\n" + e.which);
+            var pwdError = document.getElementById("pwdError");
+            if(e.keyCode>=65 && e.keyCode<=90) {
+                pwdError.style.display = "block";
+            } else {
+                pwdError.style.display = "none";
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <h4>Register New User</h4>
+    <dl>
+        <dt>User Id</dt>
+        <dd><input type="text" onkeyup="VerifyUser()" id="txtId"></dd>
+        <dd id="lblUserError"></dd>
+        <dt>Password</dt>
+        <dd><input type="password" onkeypress="VerifyCaps(event)" id="txtPwd"></dd>
+        <dd id="pwdError" style="color:goldenrod; display: none;">
+            <span class="bi bi-exclamation-triangle"> Warning : Caps ON </span>
+        </dd>
+    </dl>
+</body>
+</html>
+
+Button Events
+
+        onclick                left button single click
+        ondblclick            left button double click
+        oncontextmenu         right button single click
+        onselectstart            select and drag left button
+
+FAQ: How to disable right click in page?
+Ans:  Any event you can disable by calling a function that returns false.
+
+Syntax:
+    document.oncontextmenu = function() {
+        return false;
+    }
+
+    <body oncontextmenu="return false">
+    </body>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function OpenImage(){
+            window.open('../public/images/women-fashion.jpg','Fashion','width=300 height=400');
+        }
+        document.oncontextmenu = function(){
+            alert('Right Click not allowed');
+            return false;
+        }
+    </script>
+</head>
+<body onselectstart="return false">
+    <img ondblclick="OpenImage()" src="../public/images/women-fashion.jpg" width="100" height="100">
+    <p>Double click to view large</p>
+</body>
+</html>
+
+Clipboard Events:
+   
+        oncut
+        oncopy
+        onpaste
+
+- Clipboard is temporary memory of windows.
+- Content that you cut or copy is kept on clipboard.
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+       function Copy(){
+        document.getElementById("msg").innerHTML = "Copied to clipboard";
+       }
+    </script>
+</head>
+<body>
+   <h2 oncopy="Copy()">Clipboard is memory of windows <span class="bi bi-copy"></span> </h2>
+   <p id="msg"></p>
+   <dl>
+     <dt>Account Number</dt>
+     <dd><input type="text"></dd>
+     <dt>Verify Account Number</dt>
+     <dd><input type="text" onpaste="return false"></dd>
+   </dl>
+</body>
+</html>
+
+Element State Events
+       
+        onblur
+        onchange
+        onfocus
+
+Timer Events
+
+        setTimeout()
+        clearTimeout()
+        setInterval()
+        clearInterval()
+
+Form Events
+       
+        onsubmit
+        onreset
+
+Touch Events
+
+        ontouchstart
+        ontouchend
+        ontouchmove
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script>
+       function GetDetails(msg){
+          document.querySelector("h2").innerHTML = msg;
+       }
+    </script>
+</head>
+<body>
+   <img ontouchstart="GetDetails('Special Offers on Kids Fashion - 20% OFF')" src="../public/images/kids-fashion.jpg" width="200" height="300">
+   <img ontouchstart="GetDetails('Republic Day Sales - upto 50% OFF on women fashion')" src="../public/images/women-fashion.jpg" width="200" height="300">
+   <h2></h2>
+</body>
+</html>
+
+                         State Management
+
+- Web applications use "http" as a protocol. [Hyper Text Transfer Protocol]
+- It defines rules for communication between web page.
+- "Http" is a stateless protocol.
+- It can't remember  data between pages.
+- Stateless nature of web is good for server, as it can manage its memory by removing the data periodically.
+- Stateless is not good for client while handling continuous operations.
+- Hence state management techniques are required to remember information between pages.
+- State can be managed in 2 ways
+    a) Client Side
+    b) Server Side
+- JavaScript can manage client side state management with HTML pages.
+- There are various state management techniques
+   
+    1. Query String
+    2. Local Storage
+    3. Session Storage
+    4. Cookies
+
+
+Ex:
+1. book.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Ticket Booking</h3>
+    <form action="./summary.html">
+        <dl>
+            <dt>Departure From</dt>
+            <dd>
+                <select name="Departure">
+                    <option>Departure City</option>
+                    <option>Delhi</option>
+                    <option>Hyderabad</option>
+                </select>
+            </dd>
+            <dt>Arrival</dt>
+            <dd>
+                <select name="Arrival">
+                    <option>Arrival City</option>
+                    <option>Delhi</option>
+                    <option>Hyderabad</option>
+                </select>
+            </dd>
+            <dt>Date of Journey</dt>
+            <dd><input type="date" name="Journey"></dd>
+        </dl>
+        <button>Book</button>
+    </form>
+</body>
+</html>
+
+2. summary.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+           var data = new URLSearchParams(location.search);
+           document.getElementById("dept").innerHTML = data.get('Departure');
+           document.getElementById("arr").innerHTML = data.get('Arrival');
+           document.getElementById("date").innerHTML = data.get('Journey');
+        }
+    </script>
+    <style>
+        dt {
+            font-weight: bold;
+        }
+        dl {
+            display: grid;
+            grid-template-columns: 3fr 9fr;
+        }
+    </style>
+</head>
+<body onload="bodyload()">
+    <h3>Booking Summary</h3>
+    <dl>
+        <dt>Departure</dt>
+        <dd id="dept"></dd>
+        <dt>Arrival</dt>
+        <dd id="arr"></dd>
+        <dt>Date</dt>
+        <dd id="date"></dd>
+    </dl>
+</body>
+</html>
