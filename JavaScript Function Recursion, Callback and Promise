@@ -1,0 +1,154 @@
+Functions
+- Declaration
+- Expression
+- Parameters
+- Rest Parameters
+- Spread Operator
+- Return
+- Anonymous Function [IIFE]
+- Async and Await
+- Function Currying
+- Higher Order Functions
+- Function Closure
+
+                    Function Callback & Promise
+
+Function Callback:
+
+- Callback is a technique where a function is called automatically according to state and situation.
+- It uses blocking technique, which is synchronous.
+- It blocks all other tasks in the process and executes only specified.
+
+Syntax:
+    function  Name(call1, call2)
+    {
+        if(condition)
+        {
+          call1();
+        }
+        else
+        {
+          call2();
+        }
+    }
+
+Ex:
+<script>
+    function FetchData(url, success, failure){
+        if(url==="https://fakestoreapi.com&quot;) {
+             success([{Name:"TV", Price:34000},{Name:"Mobile", Price:12000}]);
+        } else {
+             failure("Invalid URL - Unable to Fetch Data");
+        }
+    }
+    FetchData(prompt("Enter URL"),
+    function(response){
+        console.log(response);
+    }, function(error){
+        console.log(error);
+    })
+</script>
+
+
+Function Promise:
+- Promise is just like a real-life promise that you make to perform any specified task.
+- Promise returns 2 status
+    a) resolve
+    b) reject
+- Resolve executes when request is success.
+- Reject executes when request fails.
+- Promise is "async" by default.
+- It uses "unblocking" technique.
+- It can execute the given task without blocking other tasks in process.
+
+Syntax:
+     var  ref = new Promise(function(resolve, reject){
+
+            if(condition){
+                resolve();
+            }
+            else {
+                reject();
+            }            
+     });
+
+- Promise returns 3 basic functionalities
+
+        a) then()        executes on resolve
+        b) catch()        executes on reject
+        c) finally()    executes always
+
+Syntax:
+        ref.then(function(response){})
+            .catch(function(error){})
+            .finally(function(){ })
+
+Ex:
+<script>
+     var FetchData = new Promise(function(resolve, reject){
+           var url = prompt("Enter URL");
+           if(url==="fakestore.com") {
+               resolve([{Name:"TV", Price:34000},{Name:"Mobile", Price:12000}]);
+           } else {
+               reject("Invalid URL - Unable to fetch data");
+           }
+     });
+     FetchData
+     .then(function(response){
+         var now = new Date();
+         console.log(response);
+         console.log(now.toLocaleTimeString());
+     })
+     .then(function(){
+        var now = new Date();
+         console.log("Data Fetched Successfully..");
+         console.log(now.toLocaleTimeString());
+     })
+     .catch(function(error){
+         console.log(error);
+     })
+     .finally(function(){
+         console.log("Request Completed");
+     })
+</script>
+
+                        Function Recursion
+- Recursion is a technique of calling a function with in the context of same function.
+- It is used to perform batch operations.
+- Batch operations are a set of sequential operations executed one after another.
+- Recursion allows to create indefinite loops for batch operations.
+
+Syntax:
+    function f1()
+    {
+        f1();        // recursion
+    }
+    f1();    
+
+Ex:
+<script>
+    function f1(){
+        document.write("reply-from-server<br>");
+        setTimeout(f1,2000);
+    }
+    f1();
+</script>
+
+Ex:
+<script>
+    function Factorial(n){
+        if(n===1){
+            return 1;
+        } else {
+            return n * Factorial(n-1);
+        }
+    }
+    document.write(`Factorial of 5 is ${Factorial(5)}`);
+</script>
+
+
+Task : Write a recursion to print number from 1 to 10.
+Task : Write a recursion to print the sum of all even numbers from 1 to 20.
+
+            if(n%2==0)
+Task : Write a recursion to print multiplication table.
