@@ -1,0 +1,384 @@
+1. Query String
+- Query string is a client side state management technique.
+- It stores data in the address bar of browser and append to URL.
+- It is appended using "? and &".
+- It is a key and value collection.
+
+        ?key=value&key=value&key=value
+
+- You can access query string using "location.search".
+- You can de-structure key and value by using the window method "URLSearchParams()"
+
+Syntax:
+        var str = new URLSearchParams(location.search);
+        str.get("key");
+
+Ex:
+1. book.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Ticket Booking</h3>
+    <form action="./summary.html">
+        <dl>
+            <dt>Departure From</dt>
+            <dd>
+                <select name="Departure">
+                    <option>Departure City</option>
+                    <option>Delhi</option>
+                    <option>Hyderabad</option>
+                </select>
+            </dd>
+            <dt>Arrival</dt>
+            <dd>
+                <select name="Arrival">
+                    <option>Arrival City</option>
+                    <option>Delhi</option>
+                    <option>Hyderabad</option>
+                </select>
+            </dd>
+            <dt>Date of Journey</dt>
+            <dd><input type="date" name="Journey"></dd>
+        </dl>
+        <button>Book</button>
+    </form>
+</body>
+</html>
+
+2. summary.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+           var data = new URLSearchParams(location.search);
+           document.getElementById("dept").innerHTML = data.get('Departure');
+           document.getElementById("arr").innerHTML = data.get('Arrival');
+           document.getElementById("date").innerHTML = data.get('Journey');
+        }
+    </script>
+    <style>
+        dt {
+            font-weight: bold;
+        }
+        dl {
+            display: grid;
+            grid-template-columns: 3fr 9fr;
+        }
+    </style>
+</head>
+<body onload="bodyload()">
+    <h3>Booking Summary</h3>
+    <dl>
+        <dt>Departure</dt>
+        <dd id="dept"></dd>
+        <dt>Arrival</dt>
+        <dd id="arr"></dd>
+        <dt>Date</dt>
+        <dd id="date"></dd>
+    </dl>
+</body>
+</html>
+
+2. Session Storage
+- It is a temporary storage of browser.
+- It is a client side state management technique.
+- It keeps the data in browser memory.
+- It is not accessible to other tabs in browser.
+- It is removed automatically when browser is closed.
+
+Syntax:
+        sessionStorage.setItem("key", value)
+        sessionStorage.getItem("key")
+        sessionStorage.removeItem("key")
+
+Ex:
+1. login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LoginClick(){
+            sessionStorage.setItem("username", document.getElementById("txtName").value);
+            location.href="./home.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" id="txtName"></dd>
+        <dt>Password</dt>
+        <dd><input type="password" id="txtPwd"></dd>
+    </dl>
+    <button onclick="LoginClick()">Login</button>
+</body>
+</html>
+
+2. home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function SessionTimeout(){
+            alert('Your session timed out - please login again');
+            sessionStorage.removeItem("username");
+            location.href = "./login.html";
+        }
+
+        function bodyload(){
+            if(sessionStorage.getItem("username")===null){
+                location.href = "./login.html";
+            } else {
+                document.getElementById("lblName").innerHTML = sessionStorage.getItem("username");
+                setTimeout(SessionTimeout,10000);
+            }
+        }
+        function SignoutClick(){
+            sessionStorage.removeItem("username");
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2 style="display: flex; justify-content: space-between;"><span>Home</span> <span id="lblName"></span> <button onclick="SignoutClick()">Signout</button> </h2>
+
+</body>
+</html>
+
+3. Local Storage
+- It is a client side state management technique.
+- It is permanent storage.
+- It is accessible across tabs.
+- It is not deleted when browser closed.
+- You have to explicitly delete from memory.
+
+Syntax:
+        localStorage.setItem("key", value)
+                     .getItem("key")
+                     .removeItem("key")
+
+Ex:
+1. login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LoginClick(){
+            localStorage.setItem("username", document.getElementById("txtName").value);
+            location.href="./home.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" id="txtName"></dd>
+        <dt>Password</dt>
+        <dd><input type="password" id="txtPwd"></dd>
+    </dl>
+    <button onclick="LoginClick()">Login</button>
+</body>
+</html>
+
+2. home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function bodyload(){
+            if(localStorage.getItem("username")===null){
+                location.href = "./login.html";
+            } else {
+                document.getElementById("lblName").innerHTML = localStorage.getItem("username");
+            }
+        }
+        function SignoutClick(){
+            localStorage.removeItem("username");
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2 style="display: flex; justify-content: space-between;"><span>Home</span> <span id="lblName"></span> <button onclick="SignoutClick()">Signout</button> </h2>
+
+</body>
+</html>
+
+
+4. Cookies
+- Cookie is a client side state management technique.
+- Cookie is a text document where client details can be stored.
+- Cookie can be 2 types
+    a) In-memory cookie [temporary]
+    b) persistent cookie [permanent]
+- You can set expiry for cookie.
+
+Syntax:
+    document.cookie = "cookiename=value; expires=date-time";
+
+- If "expires" is not defined then it is temporary.
+- Expires requires date format in "UTC" or "ISO", it is browser dependent.
+- To remove cookie you have to set an past date.
+
+Ex:
+1. login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LoginClick(){
+            var username = document.getElementById("txtName").value;
+            document.cookie = `uname=${username};expires=Sat, 25 Jan 2025 12:40:01 GMT`;
+            location.href="./home.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <dl>
+        <dt>User Name</dt>
+        <dd><input type="text" id="txtName"></dd>
+        <dt>Password</dt>
+        <dd><input type="password" id="txtPwd"></dd>
+    </dl>
+    <button onclick="LoginClick()">Login</button>
+</body>
+</html>
+
+2. home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function bodyload(){
+           document.getElementById("lblName").innerHTML = document.cookie.slice(document.cookie.indexOf("=")+1);
+        }
+        function SignoutClick(){
+            document.cookie = `uname='';expires=Wed, 22 Jan 2025 12:40:01 GMT`;
+            location.href = "./login.html";
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <h2 style="display: flex; justify-content: space-between;"><span>Home</span> <span id="lblName"></span> <button onclick="SignoutClick()">Signout</button> </h2>
+
+</body>
+</html>
+
+FAQ: How to check cookie status in browser?
+Ans: By using "navigator.cookieEnabled".
+
+Login.html
+
+  function bodyload(){
+            document.querySelector("p").innerHTML = (navigator.cookieEnabled)?'You can login':'Please Enable cookies on your browser';
+        }
+
+                       Browser Objects [BOM]
+- JavaScript browser objects are
+
+    1. window
+    2. document
+    3. location
+    4. navigator
+    5. history
+
+window:
+- It provides properties and methods used to control browser window.
+       
+        alert()
+        prompt()
+        confirm()
+        fetch()
+        localStorage()
+        sessionStorage()
+        URLSearchParams()
+        XMLHttpRequest
+        open()
+        close()
+        print()
+        etc..
+
+document:
+- It provides properties and methods to control the document elements
+
+        write()
+        innerHTML
+        innerText
+        textConent
+        appendChild()
+        cookie
+        getElementById()
+        querySelector()
+        etc..
+
+location:
+- It provides properties and methods access client location details
+
+        host            : return server name or IP address
+        pathname    : return the file path
+        href            : complete URL you can set or get
+        protocol        : gets the protocol name "http:"
+        port            : gets the port number "5500"
+        search        : query string
+        etc..
+
+navigator:
+- It provides properties and methods to get browser details
+   
+        appName    : browser family name
+        appVersion    : browser version
+        platform        : OS
+        language        : regional language
+        cookieEnabled: returns cookie status
+        geolocation    : returns the current geo-location of user
+        plugins[]        : returns list of all plugins installed in browser
+        mimeTypes[]    : returns list of supported additional file types
+        etc..
+
+Ex:
+<script>
+     navigator.geolocation.getCurrentPosition((position)=>{
+          document.write(`Lat=${position.coords.latitude}<br>Long=${position.coords.longitude}`);
+     })
+</script>
