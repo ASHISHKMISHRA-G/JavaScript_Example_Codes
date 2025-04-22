@@ -1,5 +1,5 @@
 Looping Control Statements
-- Looping is the process of repeating a set of statements until the given condition is satisfied.
+- Looping is the process of repeating a set of statements until the given condition is satisfied
 - Loop requires initialization, condition and counter.
 - Loops are created by using
         a) for
