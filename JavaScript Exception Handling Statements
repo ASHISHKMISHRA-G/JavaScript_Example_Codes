@@ -1,0 +1,71 @@
+ Exception Handling Statements
+- Errors in computer programming are classified into 2 types
+
+    1. Compile Time Errors
+    2. Runtime Errors
+
+- Compile time errors are due to the inability of compiler to understand the syntax or keywords you written in program.
+- A program stops compiling and reports the errors.
+- Runtime errors occur while using the application.
+- A program compiles and executes successfully but it fails to understand few instructions at runtime.
+- Runtime error leads to "Abnormal Termination" of application.
+- To avoid abnormal termination you need exception handling.
+- The exception handling statements are
+
+    a) try        It is monitoring block
+    b) catch        It is handler block
+    c) throw        It explicitly throws the exception
+    d) finally        It is a block that executes always.
+
+Syntax:
+    try {
+        statements to execute;
+    }
+    catch(error)
+    {
+            report error
+    }
+    finally {
+           executes always
+    }
+
+Syntax:
+    try {
+           statements;
+           throw "error message";
+           throw "error message";
+    }
+    catch(error)
+    {
+         report error;
+    }
+    finally {
+      statements;
+    }
+
+Ex:
+<script>
+    try {
+      var a = parseInt(prompt("Enter A value"));
+      var b = parseInt(prompt("Enter B value"));
+      if(b===0){
+         throw "Can't Divide by zero";
+      }
+      if(b>a) {
+         throw "Can't use a larger number";
+      }
+      var c = a / b;
+      document.write(`Division=${c}<br>`);
+    } catch(error) {
+       document.write(`${error}<br>`);
+    }
+    finally {
+       document.write(`End of Program`);
+    }
+</script>
+
+Summary:
+- Variables
+- Data Types
+- Operators
+- Statements
