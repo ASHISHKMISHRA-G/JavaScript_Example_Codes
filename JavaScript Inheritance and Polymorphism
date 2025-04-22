@@ -1,0 +1,361 @@
+Methods
+- Functions are not allowed as class members.
+- Hence the functionality is defined using methods.
+
+FAQ: Can we have a function in class?
+Ans: Yes. But it can't be class member.
+
+Syntax:
+    class Name
+    {
+        method(params)
+        {
+        }
+        }
+
+- Method can be void or can return a value.
+
+Ex:
+<script>
+    class Product
+    {
+        Name = "Samsung TV";
+        Price = 46000.44;
+        Qty = 2;
+        Total() {
+            return this.Qty * this.Price;
+        }
+        Print(){
+            document.write(`Name=${this.Name}<br>Price=${this.Price}<br>Total=${this.Total()}`);
+        }
+    }
+    let obj = new Product();
+    obj.Print();
+</script>
+
+                          Constructor
+- A constructor is responsible for creating instance for class.
+- Every class have a default constructor.
+- It is a special type of sub-routine that executes automatically for every object.
+- In JavaScript constructor is anonymous.
+- It can be parameterized or parameter less.
+
+Syntax:
+    class Name
+    {
+       constructor(param)
+       {
+       }
+    }
+
+- If a constructor is parameterized then the values are passed while allocating memory for object.
+
+Syntax:
+    let obj = new ClassName(values);
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Database
+        {
+            constructor(databaseName){
+                document.write(`Connected with ${databaseName} Database<br>`);
+            }
+
+            Insert(){
+                document.write(`Record Inserted`);
+            }
+            Update(){
+                document.write(`Record Updated..`);
+            }
+            Delete(){
+                document.write(`Record Deleted Successfully..`);
+            }
+        }
+        function Actions(val){
+            switch(val){
+                case "Insert":
+                 let obj1 = new Database(document.querySelector("select").value);
+                 obj1.Insert();
+                 break;
+                case "Update":
+                 let obj2 = new Database(document.querySelector("select").value);
+                 obj2.Update();
+                 break;
+                case "Delete":
+                 let obj3 = new Database(document.querySelector("select").value);
+                 obj3.Delete();
+                 break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <select>
+        <option>Select a Database</option>
+        <option>Oracle</option>
+        <option>MySQL</option>
+        <option>MongoDB</option>
+    </select>
+    <button onclick="Actions(this.value)" value="Insert">Insert</button>
+    <button onclick="Actions(this.value)" value="Update">Update</button>
+    <button onclick="Actions(this.value)" value="Delete">Delete</button>
+</body>
+</html>
+
+                    Code Reusability & Extensibility
+- Reusability is the process or using members of one class in another without rewriting the code.
+- Extensibility is the process of extending existing class with new features without disturbing the classes.
+- You can achieve reusability and extensibility by using 2 techniques
+    a) Aggregation
+    b) Inheritance
+
+Aggregation:
+- It is the process of accessing members of one class in another without creating any relationship between classes.
+- It is known as "Object-to-Object" communication.
+- It is referred as "Has-A-Relation".
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class HDFC_Bank_Version1
+        {
+            Personal = "Personal Banking Services";
+            Print(){
+                document.write(`${this.Personal}<br>`);
+            }
+        }
+        class HDFC_Bank_Version2
+        {
+            NRI  = "NRI Banking Services";
+            Print(){
+                let obj = new HDFC_Bank_Version1();
+                obj.Print();
+                document.write(`${this.NRI}<br>`);
+            }
+        }
+        class HDFC_Bank_Version3
+        {
+            Loans = "Personal and Housing Loans";
+            Print(){
+                let obj =  new HDFC_Bank_Version2();
+                obj.Print();
+                document.write(`${this.Loans}<br>`);
+            }
+        }
+        function InstallClick(){
+            var version = document.querySelector("select").value;
+            switch(version)
+            {
+                case  "ver1":
+                let obj1 = new HDFC_Bank_Version1();
+                document.write(`<h3>Version-1 Installed</h3>`);
+                obj1.Print();
+                break;
+                case  "ver2":
+                let obj2 = new HDFC_Bank_Version2();
+                document.write(`<h3>Version-2 Installed</h3>`);
+                obj2.Print();
+                break;
+                case  "ver3":
+                let obj3 = new HDFC_Bank_Version3();
+                document.write(`<h3>Version-3 Installed</h3>`);
+                obj3.Print();
+                break;
+                default:
+                document.write(`Please Select a Version`);
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>Install Bank App</h3>
+    <select>
+        <option value="-1">Select Version</option>
+        <option value="ver1">Version-1[2023]</option>
+        <option value="ver2">Version-2[2024]</option>
+        <option value="ver3">Version-3[Latest]</option>
+    </select>
+    <button onclick="InstallClick()">Install</button>
+</body>
+</html>
+
+Inheritance:
+- It is a technique of configuring relationship between classes.
+- A class can extend another class so that it can access the members of class without using any instance of class.
+- The existing class is known as "Super Class".
+- The extended class is known as "Derived Class".
+
+Syntax:
+     class A
+    {
+    }
+    class B extends A
+    {
+    }
+
+- Super class members are accessible by using "super" keyword.
+- This mechanism is known as "Is-A-Relation".
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class HDFC_Bank_Version1
+        {
+            Personal = "Personal Banking Services";
+            Print(){
+                document.write(`${this.Personal}<br>`);
+            }
+        }
+        class HDFC_Bank_Version2  extends HDFC_Bank_Version1
+        {
+            NRI  = "NRI Banking Services";
+            Print(){
+                super.Print();
+                document.write(`${this.NRI}<br>`);
+            }
+        }
+        class HDFC_Bank_Version3 extends HDFC_Bank_Version2
+        {
+            Loans = "Personal and Housing Loans";
+            Print(){
+                super.Print();
+                document.write(`${this.Loans}<br>`);
+            }
+        }
+        function InstallClick(){
+            var version = document.querySelector("select").value;
+            switch(version)
+            {
+                case  "ver1":
+                let obj1 = new HDFC_Bank_Version1();
+                document.write(`<h3>Version-1 Installed</h3>`);
+                obj1.Print();
+                break;
+                case  "ver2":
+                let obj2 = new HDFC_Bank_Version2();
+                document.write(`<h3>Version-2 Installed</h3>`);
+                obj2.Print();
+                break;
+                case  "ver3":
+                let obj3 = new HDFC_Bank_Version3();
+                document.write(`<h3>Version-3 Installed</h3>`);
+                obj3.Print();
+                break;
+                default:
+                document.write(`Please Select a Version`);
+                break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>Install Bank App</h3>
+    <select>
+        <option value="-1">Select Version</option>
+        <option value="ver1">Version-1[2023]</option>
+        <option value="ver2">Version-2[2024]</option>
+        <option value="ver3">Version-3[Latest]</option>
+    </select>
+    <button onclick="InstallClick()">Install</button>
+</body>
+</html>
+
+- If a super is extended then the derived class constructor must class the super class constructor. [by using super() ]
+
+Ex:
+<script>
+    class SuperClass
+    {
+        constructor(){
+            document.write("Super class constructor<br>");
+        }
+    }
+    class DerivedClass extends SuperClass
+    {
+         constructor(){
+            super();
+            document.write("Derived Class Constructor");
+         }
+    }
+    let obj = new DerivedClass();
+
+</script>
+
+                           Polymorphism
+- Ploy means "Many".
+- Morphos means "Forms".
+- The ability of any component to work for different situations and formats is considered as the behavior known as "Polymorphism".
+- You can create an object that can work for various classes.
+
+Ex:
+<script>
+    class Employee
+    {
+        FirstName = "";
+        LastName = "";
+        Designation = "";
+        Print(){
+            document.write(`${this.FirstName} ${this.LastName} - ${this.Designation} <br>`);
+        }
+    }
+    class Developer extends Employee
+    {
+        FirstName = "Raj";
+        LastName = "Kumar";
+        Designation = "Developer";
+        Role = "Developer role - Build, Debug, Test, Deploy";
+        Print(){
+            super.Print();
+            document.write(`${this.Role}`);
+        }
+    }
+    class Admin extends Employee
+    {
+        FirstName = "Kiran";
+        LastName = "Kumar";
+        Designation = "Admin";
+        Role = "Admin role - Authorization";
+        Print(){
+            super.Print();
+            document.write(`${this.Role}`);
+        }
+    }
+    class Manager extends Employee
+    {
+        FirstName = "Tom";
+        LastName = "Hanks";
+        Designation = "Manager";
+        Role = "Manager role - Approvals";
+        Print(){
+            super.Print();
+            document.write(`${this.Role}`);
+        }
+    }
+
+    let employees = new Array(new Developer(), new Admin(), new Manager());
+    var designation = prompt("Enter Designation");
+
+    for(var employee of employees)
+    {
+         if(employee.Designation===designation){
+            employee.Print();
+         }
+    }
+</script>
