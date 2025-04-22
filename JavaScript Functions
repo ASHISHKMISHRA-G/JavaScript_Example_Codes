@@ -1,0 +1,83 @@
+JavaScript Functions
+
+- Functions are used to "Refactor" the code.
+- Refactor is the process of extracting a set of statements into a named block in memory. So that you can reuse the statements without rewriting.
+
+Function Configuration:
+- You can configure functions in JavaScript by using 2 techniques
+   
+    a) Function Declaration
+    b) Function Expression
+
+Declaration:
+- A function declaration allows to configure memory for a function so that it can handle specific functionality every time.
+
+Syntax:    
+        function  Name()
+        {
+        }
+
+Expression:
+- A function expression allows to configure a reference memory where the function can change according state and situation.
+- You can assign a function dynamically into memory.
+- Memory is same but functionality can change.
+
+Syntax:
+       var  Name  = function() {
+
+       }
+
+- Expression uses "anonymous function", a function without name.
+- You can access anonymous function using "IIFE" [Immediately Invoking Function Expression].
+
+Syntax:
+        Name();
+
+Ex:
+<script>
+     var password = prompt("Enter Password");
+     var result;
+     if(password==="admin"){
+        result = function(){
+            document.write("Success..");
+        }
+     } else {
+        result = function(){
+            document.write("Invalid Password");
+        }
+     }
+     result();
+</script>
+
+Declaration Components:
+- A function declaration comprises of 3 basic elements.
+
+    a) Declaration
+    b) Signature
+    c) Definition
+
+Syntax:
+     function Print(params)
+    {
+
+    }
+
+    function Print(params)        => Declaration
+    Print(params)                => Signature
+    { }                        => Definition
+
+
+FAQ: What is difference between function & method?
+Ans:   function is always intended to return a value. It is immutable type.
+          method is always void and it is mutable type.
+
+Function Parameters:
+- Parameters are used to modify a function.
+- Parameters defined in declaration are known as "Formal Parameters".
+- Parameters defined while calling function are known as "Actual Parameters".
+
+Syntax:
+    function Name(formal)
+    {
+    }
+    Name(actual);            formal = actual;
