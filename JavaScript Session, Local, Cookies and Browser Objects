@@ -382,3 +382,34 @@ Ex:
           document.write(`Lat=${position.coords.latitude}<br>Long=${position.coords.longitude}`);
      })
 </script>
+
+
+1. window
+2. location
+3. navigator
+4. document
+5. history
+- It provides properties and methods to control current browsing history.
+
+    length        : returns total count of pages in browsing history
+    back()        : navigates to previous page in browsing history
+    forward()        : navigates to next page in browsing history.
+    goto()        : navigates to specific page in browsing history.
+
+
+Syntax:
+       <button onclick="history.back()">
+   
+        if(history.length>2)
+        {        
+        }
+
+Ex:
+<script>
+    if(history.length>2){
+        alert('Please register for more..');
+        location.href="../public/form-demo.html";
+    } else {
+        document.write('You can view max 2 pages for free..');
+    }
+</script>
