@@ -1,0 +1,185 @@
+JavaScript Classes
+- Class is a program template.
+- It provides a set of data and logic, which you can customize and implement according to the requirements.
+- It is easy to reuse and extend.
+- It also enables clean separation of code and its reference.
+- If a class is mapping to business requirements then it is known as "Entity".
+- If a class is mapping to data requirements then it is known as "Model".
+- Class is used as "Blue Print" to create multiple instances.
+
+Syntax:
+    class className
+    {
+       // class members
+    }
+
+- Every class can have following members
+
+    1. Property
+    2. Accessor
+    3. Method    
+    4. Constructor
+
+FAQ: Can we define variable as class member?
+Ans:  No. It is immutable and class allows only mutable members.
+
+FAQ: Can we use a variable in class?
+Ans:  Yes. But not as class member.
+
+
+                              Property
+- A property is used in class to store data.
+- Property is a reference where you can store any type of data
+    a) Primitive Type
+    b) Non Primitive Type
+- Property is mutable.
+- You can control read and write operations on property by using "accessors".
+
+Syntax:
+      class Product
+      {
+          Name = "TV";
+          Price = 56000.44;
+          Stock = true;
+          Cities = ["Hyd", "Delhi"];
+          Rating = { rate: 4.5, count: 500 }
+     }
+
+- You can access by using "this" keyword inside class and by using instance of class outside class.
+
+Syntax:
+     let  obj = new Product();
+     obj.Name;
+     obj.Price;
+
+- JavaScript ES6+ version introduces private members, which you can configure using "#".
+- A private member is accessible only within class.
+
+Syntax:
+        class Name
+        {
+           #Property = value;
+        }
+
+Ex:
+home.js
+
+
+
+export class Product
+{
+     Name = "TV";
+     Price = 45000.44;
+     #Stock = true;
+     Print(){
+        return `Stock=${this.#Stock}`;
+     }
+}
+
+home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <script type="module">
+        import { Product } from "../src/scripts/home.js";
+        let obj = new Product();
+        obj.Name = "Samsung TV";
+        obj.Price = 70000.44;
+        document.querySelector("p").innerHTML=`Name=${obj.Name}<br>Price=${obj.Price}<br>${obj.Print()}`;
+    </script>
+</head>
+<body>
+    <p></p>
+</body>
+</html>
+
+- JavaScript ES6+ version supports "static" members.
+
+Static Member:
+- Static refers to continuous memory.
+- Memory allocated for first object will continue to next.
+- Static members are accessible within or outside class by using class name.
+
+Non Static / Dynamic:
+- Dynamic refers to discreet memory. [disconnected]
+- Memory is newly allocated for every object.
+- Non static members are accessible within class by using "this" keyword and outside class by "instance" of class.
+
+Ex:
+<script>
+    class Demo
+    {
+        static s = 0;
+        n = 0;
+        constructor(){
+            Demo.s = Demo.s + 1;
+            this.n = this.n + 1;
+        }
+        Print(){
+            document.write(`s=${Demo.s} n=${this.n}<br>`);
+        }
+    }
+    let obj1 = new Demo();
+    obj1.Print();
+
+    let obj2 = new Demo();
+    obj2.Print();
+
+    let obj3 = new Demo();
+    obj3.Print();
+</script>
+
+                              Accessors
+- Accessors provide a fine grained control over property.
+- Accessor can control read and write operations on property.
+- Every property can have 2 accessors
+    a) Getter        get()
+    b) Setter         set()
+
+- Getter can read and return value of a property.
+- Setter can assign a new value into property.
+
+Syntax:
+      get  aliasName()    
+      {
+          return property;
+      }
+
+     set aliasName(newValue)
+     {
+        property = newValue;
+     }
+
+Ex:
+<script>
+    var username = prompt("Enter User Name");
+    var role = prompt("Enter Your Role", "Admin | Customer");
+   
+    class Product
+    {
+        _productName;
+
+        get ProductName(){
+            return this._productName;
+        }
+
+        set ProductName(newName){
+            if(role==="Admin") {
+                this._productName = newName;
+            } else {
+                document.write(`Hello ! ${username} - You are not authorized to set product name`);
+            }
+        }
+    }
+    let obj = new Product();
+    var productname = prompt("Enter Product Name");
+    obj.ProductName = productname;
+    if(obj.ProductName){
+        document.write(`Product Name=${obj.ProductName}`);
+    }
+</script>
