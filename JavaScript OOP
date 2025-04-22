@@ -1,0 +1,159 @@
+JavaScript OOP
+
+- Real world computer programming uses 3 types of programming systems
+    1. POPS
+    2. OBPS
+    3. OOPS
+
+POPS
+- Process Oriented Programming System
+- It can directly interact with hardware services.
+- It can use low level features.
+- It uses less memory.
+- It is faster in interactions.
+
+Ex: C, Pascal etc.
+
+Issues:
+- Reusability
+- Extensibility
+- Dynamic memory
+- Separation
+
+OBPS:
+- Object Based Programming System
+- Supports reusability and separation
+- Limited extensibility
+- Dynamic memory
+
+Ex: JavaScript, Visual Basic etc.
+
+Issues:
+- No dynamic polymorphism
+- No code level security.
+
+OOPS:
+- Object Oriented Programming System
+- Supports reusability, extensibility, code level security.
+- Have dynamic polymorphism.
+
+Ex: C++, C#, Java etc.
+
+Issues:
+- It will not directly support low level features.
+- It can't directly interact with hardware services.
+- It uses more memory.
+- It is tedious. [slow]
+
+JavaScript Modules
+- Module is a set of values, functions and classes.
+- Every application is built with set of modules.
+- Modular approach enables features like
+    a) Reusability
+    b) Extensibility
+    c) Separation
+    d) Maintainability
+    e) Testability
+- Every JavaScript file is considered as a Module.
+- To use modules in a web page, you need module systems like
+    a) Common JS
+    b) Require JS
+    c) UMD (Universal Module Distribution)
+    d) AMD (Asynchronous Module Distribution)
+    e) ESNext  etc.
+
+Note: The default approach is a "Legacy" where everything is linked but only few are used. Module allows application specific library or framework.
+
+- Every member in a module is private in access, you have to mark them as "export".
+                index.js
+        export function name()
+        {
+        }                             Index is module name
+        export class name
+        {
+        }
+- You have to import the members into module scope in a page.
+
+        <script type="module">
+             import  { className, functionName } from  "./index.js"
+        </script>
+
+Ex:
+1. src/scripts/home.js
+
+
+export function Hello(uname){
+    return `Hello ! ${uname}`;
+}
+
+export function Addition(a,b){
+    return a + b;
+}
+
+export function Multiplication(a,b) {
+    return a * b;
+}
+
+2. home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <script type="module">
+        import { Hello, Addition } from "../src/scripts/home.js";
+        document.querySelector("p").innerHTML = Hello('David') + "<br>Addition=" + Addition(10, 20);
+    </script>
+</head>
+<body>
+    <p></p>
+</body>
+</html>
+
+FAQ: How to export function expression?
+Ans: By using "default" export. Every module can have only one default export.
+
+Syntax:
+    const  name = function(){ }
+
+    export default name;
+
+    import  name  from  "file.js";
+    import  {name} from "file.js";        // invalid
+
+Ex:
+home.js
+
+export function Hello(uname){
+    return `Hello ! ${uname}`;
+}
+
+export function Addition(a,b){
+    return a + b;
+}
+
+const Multiplication = (a,b) => a * b;
+
+export default Multiplication;
+
+home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <script type="module">
+        import Multiplication, { Hello, Addition } from "../src/scripts/home.js";
+          document.querySelector("p").innerHTML = Hello('David') + "<br>Addition=" + Addition(10, 20) + "<br>Multiplication=" + Multiplication(2,6);
+    </script>
+</head>
+<body>
+    <p></p>
+</body>
+</html>
