@@ -1,0 +1,171 @@
+ Function Generator
+- Generator is used to create iterators.
+- Iterator doesn't require initialization, condition and counter.
+- It yields a value and moves to next.
+- It stops automatically if there are no more values to read.
+
+Syntax:
+    function*  Name()
+    {
+       yield  value,
+       yield  value
+    }
+
+- Generator function provides following members
+       
+    a) next()        : It returns value and done.
+    b) value        : It comprises of the value stored in memory
+    c) done        : It returns true if there are no more values to read.
+
+Syntax:
+    var ref  = GeneratorName();
+
+    ref.next()
+    ref.next().value
+    ref.next().done
+
+Ex:
+<script>
+    function* GetData()
+    {
+        yield 10,
+        yield "A",
+        yield true,
+        yield ["A", 10, 20],
+        yield {Name: "TV", Price: 24000}
+    }
+    var data = GetData();
+    console.log(data.next().value);
+    console.log(data.next().value);
+    console.log(data.next().value);
+    console.log(data.next().value);
+    console.log(data.next().value);
+    console.log(data.next());
+</script>
+
+                           Arrow Functions
+- Arrow is a short hand technique of writing function expression.
+- Arrow comprises of following literals
+
+        ()         :  for function parameters
+        =>         :  for return
+        => { }     :  for definition
+
+Syntax: without arrow
+
+        var  hello = function() {
+            document.write("Hello ! World");
+        }
+
+Syntax: with arrow
+
+        var hello = () => document.write("Hello ! World");
+       
+        var add  = (a, b) => a + b;
+        console.log(add(10,20));
+
+Ex:
+<script>
+    var add = (a,b) => a + b;
+    document.write(`Addition=${add(10,30)}`);
+    document.write("<br>");
+    var hello = uname => document.write(`Hello ! ${uname}`);
+    hello("John");
+</script>
+
+Ex:
+<script>
+    fetch("https://fakestoreapi.com/products&quot;)
+    .then(response=> response.json())
+    .then(products=> {
+         products.map((product,index)=> {
+             document.write(`[${index+1}]${product.title}<br>`);
+         })
+    })
+</script>
+
+Ex:
+<script>
+    fetch("https://fakestoreapi.com/products&quot;)
+    .then(response=>response.json())
+    .then(products=>{
+         var electronics = products.filter(product=> product.category==="electronics");
+         electronics.map(product=> {
+            document.write(`<li>${product.title}</li>`);
+         })
+    })
+   
+    /*
+    fetch("https://fakestoreapi.com/products&quot;)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(products){
+        var electronics = products.filter(function(product){
+            return product.category === "electronics";
+        });
+        electronics.map(function(product){
+            document.write(`<li>${product.title}</li>`);
+        })
+    })
+    */
+   
+</script>
+
+                          JavaScript Events
+
+1. What is Event?
+A. Event is a message sent by sender to its subscriber in order to notify the change.
+     It uses a delegate mechanism, which is function pointer mechanism.
+     It follows a communication pattern called "Observer".
+
+2. What is role of sender & subscriber?
+A. "Sender" sends a notification on event trigger.
+    "Subscriber" is a function that performs functionality when notified.
+
+
+        function InsertClick() { }        => Subscriber
+
+
+        onclick="InsertClick()"        => Sender
+
+3. What is Event Handler?
+A. Event handler describes the event and functionality to execute on trigger.
+
+        onclick                    => Event
+        onclick="InsertClick()"        => Event Handler
+
+4. What is Event Listener?
+A. Event listener allows to configure event for any element dynamically.
+
+Syntax:
+        button.addEventListener("event", function(){
+
+        })
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bodyload(){
+            var button = document.createElement("button");
+            button.innerHTML = "Search";
+            button.addEventListener("click", ()=> {
+                 document.write("Record Inserted");
+            })
+            document.querySelector("nav").appendChild(button);
+
+            document.getElementById("btnHome").addEventListener("click",()=>{
+                document.write("Home Clicked");
+            })
+        }
+    </script>
+</head>
+<body onload="bodyload()">
+    <nav> <button id="btnHome">Home</button></nav>
+</body>
+</html>
