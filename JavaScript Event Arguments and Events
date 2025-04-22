@@ -1,0 +1,335 @@
+1. What is Event?
+    - Delegate [Function Pointer]
+    - Observer Pattern [Communication]
+2. What is Event Handler?
+3. What is Event Listener?
+
+4. What are Event Arguments?
+A. Event arguments are used to carry data from element to function.
+    Event arguments are classified into
+        a) Default Arguments
+        b) Custom Arguments
+
+
+5. What are Default Arguments?
+A. The default event arguments are
+    a) this
+    b) event
+
+     "this" sends information about current element, which includes details like
+    a) id
+    b) name
+    c) class
+    d) src
+    e) href etc..
+
+     "event" sends information about current event, which includes details like
+    a) clientX
+    b) clientY
+    c) ctrlKey, altKey, shiftKey etc..
+
+Syntax:
+    <button onclick="InsertClick(this, event)" id="btnInsert">
+
+    function InsertClick(obj, e)
+    {
+    }
+
+Note: You can send specific element or event details as argument.
+
+      onclick="InsertClick(this.src, event.clientX)"
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       function ImageClick(obj, e){
+          document.querySelector("p").innerHTML = `
+             Image Path : ${obj.src} <br>
+             Image width: ${obj.width} <br>
+             X Position : ${e.clientX} <br>
+             Y Position : ${e.clientY}
+          `;
+          if((e.clientX>=234 && e.clientX<=277) && (e.clientY>=236 && e.clientY<=256)){
+             document.write("Shoe Price : 4560.45");
+          }
+       }
+    </script>
+</head>
+<body>
+   
+    <img onclick="ImageClick(this, event)" src="../public/images/women-fashion.jpg" width="300" height="400">
+    <p></p>
+</body>
+</html>      
+
+6. What are custom arguments?
+A. Event allows to send custom details.
+    Custom argument can be any type
+    a) Primitive
+    b) Non Primitive
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <script>
+        function Player(action){
+            var p = document.querySelector("p");
+            switch(action){
+                case "Play":
+                p.innerHTML = "Playing Music";
+                break;
+                case "Pause":
+                p.innerHTML = "Paused Playing";
+                break;
+                case "Stop":
+                p.innerHTML = "Stopped Playing";
+                break;
+            }
+        }
+        function DetailsClick(obj,...details){
+            console.log(details);
+            console.log(obj.id);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="Player('Play')" class="bi bi-play"></button>
+    <button onclick="Player('Pause')" class="bi bi-pause"></button>
+    <button onclick="Player('Stop')" class="bi bi-stop"></button>
+    <p></p>
+    <button id="btnDetails" onclick="DetailsClick(this,1, 'TV', 45000.33, true, ['Delhi','Hyd'], {rate:4.2})">Product Details</button>
+</body>
+</html>
+
+7. What are the arguments allowed for Event Listener?
+A. Event Listener allows only one argument that refers to event. However the event
+    argument can access both event and element details.
+
+Syntax:
+   button.addEventListener("click", function(e){
+       
+        e.clientX, clientY, ctrlKey, altKey..
+        e.target.id, e.target.value, e.target.className ..
+   
+   })
+
+    "target" is a property that provides access to element details.
+
+
+8. What is event propagation or event bubbling? How to handle propagation?
+A. Event propagation is a mechanism where the child event may simulate the parent events. You can prevent propagation by using event argument method "stopPropagation()".
+
+Syntax:
+    function ChildEvent(e)
+    {
+        e.stopPropagation();
+    }
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav {
+            border:2px solid black;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        function NavClick(){
+            alert('Navbar Clicked');
+        }
+        function SearchClick(e){
+            e.stopPropagation();
+            alert('Search Clicked');
+        }
+    </script>
+</head>
+<body>
+    <nav onclick="NavClick()">
+        <h3>Shopper</h3>
+        <button onclick="SearchClick(event)">Search</button>
+    </nav>
+</body>
+</html>
+
+
+9. How to stop default actions of any element?
+A. Generic elements in HTML have pre-defined functionality.
+     You can prevent the default actions execution by using event method "preventDefault()".
+
+Syntax:
+        function SubmitClick(e)
+        {
+          e.preventDefault();
+        }
+        <form onsubmit="SubmitClick(event)">
+
+        </form>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+    <script>
+       function SubmitClick(e){
+           e.preventDefault();
+           console.log("Form Submitted..");
+       }
+    </script>
+</head>
+<body>
+    <form onsubmit="SubmitClick(event)">
+        User Name :
+        <input type="text" name="UserName">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+                          Browser Events
+- Events are related to browser window object.
+- Elements can use events to handle various functionalities.
+- Events are categorized into various groups
+
+    1. Mouse Events
+    2. Button Events
+    3. Keyboard Events
+    4. Clipboard Events
+    5. Timer Events
+    6. Touch Events
+    7. Form Events
+    8. Element State Events etc..
+
+Mouse Events:
+        onmouseover
+        onmouseout
+        onmousedown
+        onmouseup
+        onmousemove
+
+
+Ex: MouseOver
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        nav img {
+            border:2px solid gray;
+        }
+        nav img:hover {
+            border:2px solid blue;
+            cursor: grab;
+        }
+    </style>
+    <script>
+        function bodyload(){
+            fetch('https://fakestoreapi.com/products/category/jewelery&#39;)
+            .then(response=>response.json())
+            .then(products=>{
+                products.map(product=>{
+                    var img = document.createElement("img");
+                    img.src=product.image;
+                    img.width="80";
+                    img.height="80";
+                    img.className="my-4 d-block p-2";
+                    img.addEventListener("mouseover", (e)=>{
+                        document.getElementById("imgPreview").src = e.target.src;
+                    })
+                    document.querySelector("nav").appendChild(img);
+                })
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="row mt-4">
+        <div class="col-1">
+            <nav>
+
+            </nav>
+        </div>
+        <div class="col-11">
+            <img width="400" id="imgPreview" class="mt-4" height="400">
+        </div>
+    </div>
+</body>
+</html>
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        nav img {
+            border:2px solid gray;
+        }
+        nav img:hover {
+            border:2px solid blue;
+            cursor: grab;
+        }
+    </style>
+    <script>
+        function bodyload(){
+            fetch('https://fakestoreapi.com/products/category/jewelery&#39;)
+            .then(response=>response.json())
+            .then(products=>{
+                products.map(product=>{
+                    var img = document.createElement("img");
+                    img.src=product.image;
+                    img.width="80";
+                    img.height="80";
+                    img.className="my-4 d-block p-2";
+                    img.addEventListener("mouseover", (e)=>{
+                        document.getElementById("imgPreview").src = e.target.src;
+                    })
+                    document.querySelector("nav").appendChild(img);
+                })
+            })
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <div class="row mt-4">
+        <div class="col-1">
+           <marquee onmouseover="this.stop()" onmouseout="this.start()" direction="up" scrollamount="15">
+            <nav>
+
+            </nav>
+           </marquee>
+        </div>
+        <div class="col-11">
+            <img width="400" id="imgPreview" class="mt-4" height="400">
+        </div>
+    </div>
+</body>
+</html>
