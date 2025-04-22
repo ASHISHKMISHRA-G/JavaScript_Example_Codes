@@ -187,3 +187,160 @@ Ex:
    </select>
 </body>
 </html>
+
+---------------------------------------------------------------------------------------------------------------------------
+Nested For
+Ex:
+<script>
+     var values = [[10, 20, 24], [30, 40, 50]];
+     for(var i=0; i<values.length; i++)
+     {
+          for(var j=0; j<values[i].length; j++){
+              document.write(values[i][j] + "&nbsp; &nbsp; &nbsp;");
+          }
+          document.write("<br><br>");
+     }
+</script>
+
+Ex:
+<script>
+     var values = [[10, 20, 24], [30, 40, 50]];
+     values.map(function(collection){
+          collection.map(function(value){
+              document.write(`${value} &nbsp; &nbsp;`);
+          })
+          document.write("<br><br>");
+     })
+</script>
+
+FAQ:  Write program to print triangle of "*"
+
+            *
+            *  *
+            *  *  *
+            *  *  *  *
+            *  *  *   *  *
+   
+       function PrintPattern(n)
+       {
+
+       }
+       PrintPattern(5);
+
+Ex:
+<script>
+      function PrintPattern(n){
+          for(var i=1; i<=n;i++){
+              for(var j=1; j<=i; j++){
+                 document.write(`* &nbsp; &nbsp;`);
+              }
+              document.write("<br>");
+          }
+      }
+      PrintPattern(parseInt(prompt("Enter Number")));
+</script>
+
+
+Ex:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script>
+       var menu = [
+          {Category: "Electronics", Products: ["Televisions", "Mobiles", "Watches"]},
+          {Category: "Footwear", Products: ["Casuals", "Sneakers", "Boots"]}
+       ];
+       function bodyload(){
+           for(var i=0; i<menu.length; i++)
+           {
+               var li = document.createElement("li");
+               li.innerHTML = menu[i].Category;
+               for(var j=0; j<menu[i].Products.length; j++){
+                   var ul = document.createElement("ul");
+                   ul.type = "square";
+                   var ul_li = document.createElement("li");
+                   ul_li.innerHTML = menu[i].Products[j];
+                   ul.appendChild(ul_li);
+                   li.appendChild(ul);
+                   document.querySelector("ol").appendChild(li);
+               }
+           }
+       }
+   </script>
+</head>
+<body onload="bodyload()">
+   <ol>
+
+   </ol>
+</body>
+</html>
+
+Jump Statements in Loop:
+
+        break        It terminates the block.
+        continue        It skips the iterator and continue to next
+
+Ex:
+<script>
+    for(var i=1; i<=10; i++){
+         
+         if(i===5 || i===8) {
+             continue;
+         }
+         document.write(i + "<br>");
+    }
+</script>
+
+Ex:
+<script>
+    fetch("../data/products.json")
+    .then(function(response){
+       return response.json();
+    })
+    .then(function(products){
+         for(var i=0; i<products.length; i++){
+               if(products[i].category==="footwear"){
+                  continue;
+               }
+              document.write(`${products[i].title} - <b> ${products[i].category} </b><br>`);
+         }
+    })
+</script>
+-------------------------------------------------------------------------------------------------------------------------------
+While Loop:
+- It is used by developer when not sure about number of iterations and counter may change dynamically.
+- It executes statements only when condition evaluates to true.
+
+Syntax:
+    while(condition)
+    {
+        counter;
+        statements;
+    }
+
+Ex:
+    var i=1;
+    while(i<=10)
+    {
+        console.log(i);
+        i++;
+    }
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Do While:
+- It is similar to while but ensures that statements will execute at least once even when the condition is false.
+
+Syntax:
+    do {
+       statements;
+       counter;
+    } while(condition)
+
+Ex:
+    var i=1;
+    do {
+         console.log(i);
+         i++;
+    } while(i<=10);
